@@ -1,7 +1,7 @@
 module Root = [%styled.div {|
-    display: flex;
-    color: white;
-  |}];
+  display: flex;
+  color: white;
+|}];
 
 module AppBar = [%styled.div
   {|
@@ -17,4 +17,4 @@ module AppBar = [%styled.div
 
 module Content = [%styled.div {|
   width: 100%;
-  |}];
+|}];
