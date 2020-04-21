@@ -2,7 +2,7 @@
   "name": "reason-game-of-life",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://alanrsoares.github.io/reason-game-of-life",
+  "homepage": "https://alanrsoares.github.io/reason-game-of-life",
   "scripts": {
     "start": "concurrently 'yarn re:watch' 'yarn start:web'",
     "start:web": "react-scripts start",
