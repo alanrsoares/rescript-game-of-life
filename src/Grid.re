@@ -12,7 +12,7 @@ let renderTile = (onToggle, x: int, cellState: Game.cellState) =>
   />;
 
 let renderRow = (onToggle, y: int, row) =>
-  <div className="Grid--row" key={string_of_int(y)}>
+  <div key={string_of_int(y)}>
     {row->Belt.Array.mapWithIndex(renderTile(onToggle(y))) |> arr}
   </div>;
 
