@@ -6,7 +6,7 @@
   "scripts": {
     "start": "concurrently 'yarn re:watch' 'yarn start:web'",
     "start:web": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "yarn re:build && react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject",
     "re:build": "bsb -make-world -clean-world",
