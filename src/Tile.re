@@ -8,8 +8,11 @@ module Wrapper = [%styled.div
     width: .9rem;
     height: 1rem;
     margin: .05rem;
-    background-color: $background;
+    background: $background;
     border-radius: .1rem;
+    transition-property: background;
+    transition-duration: .1s;
+    transition-timing-function: ease-in-out;
   |j}
 ];
 
