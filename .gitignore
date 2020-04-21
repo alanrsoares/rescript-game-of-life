@@ -26,6 +26,7 @@ yarn-error.log*
 *.bs.js
 lib/
 .merlin
+.bsb.lock
 
 # ionide
 .ionide
