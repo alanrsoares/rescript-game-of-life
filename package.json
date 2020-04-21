@@ -2,19 +2,31 @@
   "name": "reason-game-of-life",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "concurrently 'yarn re:watch' 'yarn start:web'",
+    "start:web": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "re:build": "bsb -make-world -clean-world",
+    "re:watch": "bsb -make-world -clean-world -w"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "reason-react": "0.7.0"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "@ahrefs/bs-emotion": "^1.0.1",
+    "@davesnx/styled-ppx": "^0.8.0",
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.6",
+    "bs-platform": "7.2.2",
+    "concurrently": "^5.1.0"
   },
   "eslintConfig": {
     "extends": "react-app"

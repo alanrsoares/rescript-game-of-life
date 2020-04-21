@@ -1,0 +1,22 @@
+{
+  "name": "reason-game-of-life",
+  "reason": { "react-jsx": 3 },
+  "bsc-flags": ["-bs-super-errors"],
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true
+    }
+  ],
+  "package-specs": [
+    {
+      "module": "es6",
+      "in-source": true
+    }
+  ],
+  "suffix": ".bs.js",
+  "namespace": true,
+  "bs-dependencies": ["reason-react", "@ahrefs/bs-emotion"],
+  "ppx-flags": ["@davesnx/styled-ppx/styled-ppx"],
+  "refmt": 3
+}
