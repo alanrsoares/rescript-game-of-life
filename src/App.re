@@ -7,6 +7,10 @@ let make = () => {
   let (state, dispatch) = React.useReducer(Reducers.root, initialState);
 
   let handleToggle = React.useCallback0((y, x) => dispatch(Toggle((y, x))));
+  let handleReset = React.useCallback0(_ => dispatch(Reset));
+  let handleRandom = React.useCallback0(_ => dispatch(Random));
+  let handleTick = React.useCallback0(_ => dispatch(Tick));
+
   let handleToggleAutoPlay =
     React.useCallback2(
       _ => {
@@ -30,9 +34,9 @@ let make = () => {
       <AppBar> "Conway's Game of Life"->Util.str </AppBar>
       <Controls
         isPlaying={state.isPlaying}
-        onReset={_ => dispatch(Reset)}
-        onRandom={_ => dispatch(Random)}
-        onTick={_ => dispatch(Tick)}
+        onReset=handleReset
+        onRandom=handleRandom
+        onTick=handleTick
         onToggleAutoplay=handleToggleAutoPlay
       />
       <Grid data={state.grid} onToggle=handleToggle />
