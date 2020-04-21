@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/reason-game-of-life/static/css/main.e94b00b1.chunk.css",
+    "main.js": "/reason-game-of-life/static/js/main.c3c25525.chunk.js",
+    "main.js.map": "/reason-game-of-life/static/js/main.c3c25525.chunk.js.map",
+    "runtime-main.js": "/reason-game-of-life/static/js/runtime-main.13ccb877.js",
+    "runtime-main.js.map": "/reason-game-of-life/static/js/runtime-main.13ccb877.js.map",
+    "static/js/2.3a0312e2.chunk.js": "/reason-game-of-life/static/js/2.3a0312e2.chunk.js",
+    "static/js/2.3a0312e2.chunk.js.map": "/reason-game-of-life/static/js/2.3a0312e2.chunk.js.map",
+    "index.html": "/reason-game-of-life/index.html",
+    "precache-manifest.cc956e584b067dfc909dc50edf387947.js": "/reason-game-of-life/precache-manifest.cc956e584b067dfc909dc50edf387947.js",
+    "service-worker.js": "/reason-game-of-life/service-worker.js",
+    "static/css/main.e94b00b1.chunk.css.map": "/reason-game-of-life/static/css/main.e94b00b1.chunk.css.map",
+    "static/js/2.3a0312e2.chunk.js.LICENSE.txt": "/reason-game-of-life/static/js/2.3a0312e2.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.13ccb877.js",
+    "static/js/2.3a0312e2.chunk.js",
+    "static/css/main.e94b00b1.chunk.css",
+    "static/js/main.c3c25525.chunk.js"
+  ]
+}
