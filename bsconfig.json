@@ -6,17 +6,21 @@
     {
       "dir": "src",
       "subdirs": true
+    },
+    {
+      "dir": "__tests__",
+      "type": "dev"
     }
   ],
   "package-specs": [
     {
-      "module": "es6",
+      "module": "commonjs",
       "in-source": true
     }
   ],
   "suffix": ".bs.js",
   "namespace": true,
-  "bs-dependencies": ["reason-react", "@ahrefs/bs-emotion"],
+  "bs-dependencies": ["reason-react", "@ahrefs/bs-emotion", "@glennsl/bs-jest"],
   "ppx-flags": ["@davesnx/styled-ppx/styled-ppx"],
   "refmt": 3
 }

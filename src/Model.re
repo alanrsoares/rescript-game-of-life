@@ -16,12 +16,12 @@ type action =
   | Tick
   | Toggle(Game.position);
 
-let make_seed = () => Js.Date.now()->int_of_float;
+let makeSeed = () => Js.Date.now()->int_of_float;
 
 let boardSize = 30;
 
 let initialState = {
-  grid: Game.make_random_grid(boardSize, make_seed()),
+  grid: Game.makeRandomGrid(boardSize, makeSeed()),
   isPlaying: false,
   animationFrameId: ref(0),
   score: ref(0),
@@ -33,10 +33,10 @@ let initialState = {
 module Reducers = {
   let grid = (self, action, state): Game.grid =>
     switch (action) {
-    | Random => Game.make_random_grid(boardSize, make_seed())
-    | Reset => Game.make_blank_grid(30)
-    | Tick => Game.next_generation(state.score, self)
-    | Toggle(position) => self->Game.toggle_tile(position)
+    | Random => Game.makeRandomGrid(boardSize, makeSeed())
+    | Reset => Game.makeBlankGrid(30)
+    | Tick => Game.nextGeneration(state.score, self)
+    | Toggle(position) => self->Game.toggleTile(position)
     | _ => self
     };
 
@@ -72,7 +72,7 @@ module Reducers = {
   let frameRate = (self, action, state) =>
     switch (action, state.startedAt) {
     | (Stop, _) => 0
-    | (Tick, Some(startedAt)) => Util.avg_frame_rate(state.ticks, startedAt)
+    | (Tick, Some(startedAt)) => Util.avgFrameRate(state.ticks, startedAt)
     | _ => self
     };
 
