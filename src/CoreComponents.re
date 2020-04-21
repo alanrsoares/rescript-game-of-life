@@ -1,14 +1,20 @@
+module Root = [%styled.div {|
+    display: flex;
+    color: white;
+  |}];
+
 module AppBar = [%styled.div
   {|
-    height: 2em;
-    border: 1px solid #333;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2rem;
+    font-size: 2rem;
+    line-height: 1rem;
   |}
 ];
 
-module Content = [%styled.div
-  {|
-    width: 600px;
-    align-self: center;
-    justify-self:center;
-  |}
-];
+module Content = [%styled.div {|
+  width: 100%;
+  |}];

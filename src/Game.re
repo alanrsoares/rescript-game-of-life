@@ -14,15 +14,14 @@ let safePosition = ((y, x): position, len): position => (
 );
 
 let mapGrid = (fn: (position, cellState, grid) => cellState, grid): grid =>
-  Array.(
-    mapi(
-      (y, row) => row |> mapi((x, tile) => fn((y, x), tile, grid)),
-      grid,
+  Belt.Array.(
+    mapWithIndex(grid, (y, row) =>
+      row->mapWithIndex((x, tile) => fn((y, x), tile, grid))
     )
   );
 
-let makeBlankGrid = (size: int): grid =>
-  Array.(make(size, make(size, Dead)));
+let makeBlankGrid = (size': int): grid =>
+  Belt.Array.(make(size', make(size', Dead)));
 
 let makeRandomGrid = (size: int, seed: int): grid => {
   Random.init(seed);
@@ -73,8 +72,8 @@ let nextState = (score: ref(int), position, cellState: cellState, grid) => {
 let nextGeneration = score => mapGrid(nextState(score));
 
 let toggleTile = (grid, position) => {
-  let grid' = grid |> Array.(map(copy));
-  let (y, x) = position->safePosition(grid->Array.length);
+  let grid' = grid->Belt.Array.(map(copy));
+  let (y, x) = position->safePosition(grid->Belt.Array.length);
   let tile = grid'[y][x];
 
   grid'[y][x] = (

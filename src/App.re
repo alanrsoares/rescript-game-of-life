@@ -1,28 +1,49 @@
-open CoreComponents;
-open Util;
-
 open Model;
-
-module Wrapper = [%styled.div
-  {|
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-    flex-direction: column;
-    background-color: #eaeaea;
-  |}
-];
+open Util;
+open CoreComponents;
 
 [@react.component]
 let make = () => {
-  let (_state, _dispatch) = React.useReducer(Reducers.root, initialState);
+  let (state, dispatch) = React.useReducer(Reducers.root, initialState);
 
-  <Wrapper>
+  let handleToggle = React.useCallback0((y, x) => dispatch(Toggle((y, x))));
+  let handleToggleAutoPlay =
+    React.useCallback2(
+      _ => {
+        let rec play = () => {
+          state.animationFrameId := requestAnimationFrame(play);
+          dispatch(Tick);
+        };
+        if (state.isPlaying) {
+          cancelAnimationFrame(state.animationFrameId^);
+          dispatch(Stop);
+        } else {
+          play();
+          dispatch(Start);
+        };
+      },
+      (state.animationFrameId, state.isPlaying),
+    );
+
+  <Root>
     <Content>
-      <AppBar> "Game of Life"->str </AppBar>
-      <Controls />
-      <Grid />
-      <Profiler />
+      <AppBar> "Conway's Game of Life"->Util.str </AppBar>
+      <Controls
+        isPlaying={state.isPlaying}
+        onReset={_ => dispatch(Reset)}
+        onRandom={_ => dispatch(Random)}
+        onTick={_ => dispatch(Tick)}
+        onToggleAutoplay=handleToggleAutoPlay
+      />
+      <Grid data={state.grid} onToggle=handleToggle />
+      <div>
+        (
+          state.isPlaying ?
+            "avg update rate: " ++ state.frameRate->string_of_int ++ " fps" :
+            ""
+        )
+        ->str
+      </div>
     </Content>
-  </Wrapper>;
+  </Root>;
 };
