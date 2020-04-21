@@ -1,8 +1,8 @@
 open Util;
 
 module Wrapper = [%stiled.div {|
-    display: flex;
-  |}];
+  display: flex;
+|}];
 
 let renderTile = (onToggle, x: int, cellState: Game.cellState) =>
   <Tile
