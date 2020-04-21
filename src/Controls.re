@@ -28,20 +28,27 @@ module Button = [%styled.button
 
 module ToggleButton = {
   [@react.component]
-  let make = (~isToggled, ~onClick, ~disabled=false) =>
-    <Button background="gray" onClick disabled>
-      (isToggled ? "PAUSE" : "PLAY")->str
+  let make = (~isToggled, ~onClick, ~disabled=false) => {
+    let icon = isToggled ? "pause" : "play";
+
+    <Button background={isToggled ? "#666" : "#7A8288"} onClick disabled>
+      <i className={"fas fa-" ++ icon ++ "-circle"} />
     </Button>;
+  };
 };
 
 [@react.component]
 let make = (~isPlaying, ~onReset, ~onRandom, ~onTick, ~onToggleAutoplay) =>
   <Wrapper>
     <div role="group">
-      <Button background="#ee5f5b" onClick=onReset> "RESET"->str </Button>
-      <Button background="#62c462" onClick=onRandom> "RANDOMIZE"->str </Button>
+      <Button background="#ee5f5b" onClick=onReset>
+        <i className="fas fa-undo" />
+      </Button>
+      <Button background="#62c462" onClick=onRandom>
+        <i className="fas fa-random" />
+      </Button>
       <Button background="#7A8288" disabled=isPlaying onClick=onTick>
-        "NEXT"->str
+        <i className="fas fa-forward" />
       </Button>
       <ToggleButton isToggled=isPlaying onClick=onToggleAutoplay />
     </div>

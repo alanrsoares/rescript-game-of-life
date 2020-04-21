@@ -13,6 +13,7 @@ module Wrapper = [%styled.div
     transition-property: background;
     transition-duration: .1s;
     transition-timing-function: ease-in-out;
+    cursor: pointer;
   |j}
 ];
 

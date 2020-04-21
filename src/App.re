@@ -6,7 +6,8 @@ open CoreComponents;
 let make = () => {
   let (state, dispatch) = React.useReducer(Reducers.root, initialState);
 
-  let handleToggle = React.useCallback0((y, x) => dispatch(Toggle((y, x))));
+  let handleToggleTile =
+    React.useCallback0((y, x) => dispatch(Toggle((y, x))));
   let handleReset = React.useCallback0(_ => dispatch(Reset));
   let handleRandom = React.useCallback0(_ => dispatch(Random));
   let handleTick = React.useCallback0(_ => dispatch(Tick));
@@ -31,7 +32,7 @@ let make = () => {
 
   <Root>
     <Content>
-      <AppBar> "Conway's Game of Life"->Util.str </AppBar>
+      <AppBar> "Conway's Game of Life"->str </AppBar>
       <Controls
         isPlaying={state.isPlaying}
         onReset=handleReset
@@ -39,7 +40,7 @@ let make = () => {
         onTick=handleTick
         onToggleAutoplay=handleToggleAutoPlay
       />
-      <Grid data={state.grid} onToggle=handleToggle />
+      <Grid data={state.grid} onToggle=handleToggleTile />
       <div>
         (
           state.isPlaying ?
