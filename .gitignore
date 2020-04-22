@@ -24,7 +24,7 @@ yarn-error.log*
 
 # reason/bucklescript
 *.bs.js
-lib/
+lib/bs
 .merlin
 .bsb.lock
 
