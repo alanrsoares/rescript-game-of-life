@@ -18,3 +18,8 @@ module AppBar = [%styled.div
 module Content = [%styled.div {|
   width: 100%;
 |}];
+
+module Icon = {
+  [@react.component]
+  let make = (~name) => <i className={"fas fa-" ++ name} />;
+};

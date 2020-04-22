@@ -1,4 +1,4 @@
-open Util;
+open CoreComponents;
 
 module Wrapper = [%styled.div
   {|
@@ -28,12 +28,11 @@ module Button = [%styled.button
 
 module ToggleButton = {
   [@react.component]
-  let make = (~isToggled, ~onClick, ~disabled=false) => {
-    let icon = isToggled ? "pause" : "play";
+  let make = (~isToggled, ~onClick, ~label, ~disabled=false) => {
+    let icon = isToggled ? "pause-circle" : "play-circle";
+    let background = isToggled ? "#666" : "#7A8288";
 
-    <Button background={isToggled ? "#666" : "#7A8288"} onClick disabled>
-      <i className={"fas fa-" ++ icon ++ "-circle"} />
-    </Button>;
+    <Button label background onClick disabled> <Icon name=icon /> </Button>;
   };
 };
 
@@ -41,15 +40,23 @@ module ToggleButton = {
 let make = (~isPlaying, ~onReset, ~onRandom, ~onTick, ~onToggleAutoplay) =>
   <Wrapper>
     <div role="group">
-      <Button background="#ee5f5b" onClick=onReset>
-        <i className="fas fa-undo" />
+      <Button label="Reset grid" background="#ee5f5b" onClick=onReset>
+        <Icon name="undo" />
       </Button>
-      <Button background="#62c462" onClick=onRandom>
-        <i className="fas fa-random" />
+      <Button label="Random grid" background="#62c462" onClick=onRandom>
+        <Icon name="random" />
       </Button>
-      <Button background="#7A8288" disabled=isPlaying onClick=onTick>
-        <i className="fas fa-forward" />
+      <Button
+        label="Next state"
+        background="#7A8288"
+        disabled=isPlaying
+        onClick=onTick>
+        <Icon name="forward" />
       </Button>
-      <ToggleButton isToggled=isPlaying onClick=onToggleAutoplay />
+      <ToggleButton
+        label="Toggle autpplay"
+        isToggled=isPlaying
+        onClick=onToggleAutoplay
+      />
     </div>
   </Wrapper>;
