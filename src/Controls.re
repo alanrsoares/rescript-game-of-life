@@ -29,10 +29,10 @@ module Button = [%styled.button
 module ToggleButton = {
   [@react.component]
   let make = (~isToggled, ~onClick, ~label, ~disabled=false) => {
-    let icon = isToggled ? "pause-circle" : "play-circle";
     let background = isToggled ? "#666" : "#7A8288";
+    let name = isToggled ? "pause-circle" : "play-circle";
 
-    <Button label background onClick disabled> <Icon name=icon /> </Button>;
+    <Button label background onClick disabled> <Icon name /> </Button>;
   };
 };
 
