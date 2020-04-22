@@ -15,7 +15,7 @@ module Wrapper = [%styled.div
 
 [@react.component]
 let make = (~isAlive, ~onToggle) => {
-  let background = isAlive ? "#fff" : "#272B30";
+  let background = isAlive ? "#FFFFFF" : "#272B30";
 
   let handleMouseEvent =
     React.useCallback0((callback, e) =>

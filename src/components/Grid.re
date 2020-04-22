@@ -4,7 +4,7 @@ module Wrapper = [%stiled.div
   {|
     display: flex;
     border: .2em solid black;
-    border-radius: .2em;
+    border-radius: .5em;
   |}
 ];
 
