@@ -9,22 +9,30 @@ module Wrapper = [%styled.div
   |}
 ];
 
-module Button = [%styled.button
-  (~background) => {j|
-    font-size: .9rem;
-    padding: .5rem .8rem;
-    background-color: $background;
-    min-width: 5rem;
-    color: white;
-    border-radius: .3rem;
-    margin: 0 .1rem;
-    border-width: 0;
-    user-select: none;
-    outline: 0rem none white;
-    font-weight: 700;
-    cursor: pointer;
-  |j}
-];
+module Button = {
+  [@react.component]
+  let make = (~label, ~background, ~onClick, ~disabled=false, ~children) => {
+    let className = [%css
+      {j|
+        font-size: .9rem;
+        padding: .5rem .8rem;
+        background-color: $background;
+        width: 3rem;
+        height: 3rem;
+        color: white;
+        border-radius: 50%;
+        margin: 0 .5rem;
+        border-width: 0;
+        user-select: none;
+        outline: 0rem none white;
+        font-weight: 700;
+        cursor: pointer;
+      |j}
+    ];
+
+    <button ariaLabel=label className disabled onClick> children </button>;
+  };
+};
 
 module ToggleButton = {
   [@react.component]
