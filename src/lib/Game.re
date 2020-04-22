@@ -56,20 +56,17 @@ let countLivingNeighbours = (grid, position): int =>
     |> length
   );
 
-let nextState = (score: ref(int), position, cellState: cellState, grid) => {
+let nextState = (position, cellState: cellState, grid) => {
   let neighbours = grid->countLivingNeighbours(position);
 
   switch (cellState, neighbours) {
   | (Alive, 2 | 3) => Alive
-  | (Dead, 3) =>
-    /* sneaky ref update */
-    score := score^ + 1;
-    Alive;
+  | (Dead, 3) => Alive
   | _ => Dead
   };
 };
 
-let nextGeneration = score => mapGrid(nextState(score));
+let nextGeneration = mapGrid(nextState);
 
 let toggleTile = (grid, position) => {
   let grid' = grid->Belt.Array.(map(copy));

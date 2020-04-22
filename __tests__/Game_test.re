@@ -1,45 +1,46 @@
 open Jest;
-open Expect;
 
 describe("Game", () => {
+  open Expect;
+
   let x = Game.Alive;
   let o = Game.Dead;
 
   describe("makeRandomGrid", () =>
     test("should create a grid with the correct length", () =>
-      expect(Game.makeRandomGrid(3, 2) |> Array.length) |> toBe(3)
+      expect(Game.makeRandomGrid(3, 2)->Belt.Array.length) |> toBe(3)
     )
   );
 
   describe("getTile", () =>
     test("should get the value of a tile given the positions", () => {
       let grid = [|[|o, o, o|], [|x, x, x|], [|o, o, o|]|];
-      let tile_position = (1, 1);
+      let tilePosition = (1, 1);
 
-      expect(grid->Game.getTile(tile_position)) |> toBe(Game.Alive);
+      expect(grid->Game.getTile(tilePosition)) |> toBe(Game.Alive);
     })
   );
 
   describe("countLivingNeighbours", () =>
     test("should get number of live neighbours of a given tile", () => {
       let grid = [|[|o, o, o|], [|x, x, x|], [|o, o, o|]|];
-      let tile_position = (0, 1);
+      let tilePosition = (0, 1);
 
-      expect(grid->Game.countLivingNeighbours(tile_position)) |> toBe(3);
+      expect(grid->Game.countLivingNeighbours(tilePosition)) |> toBe(3);
     })
   );
 
   describe("toggle_cell", () => {
     let grid = [|[|o, o, o|], [|x, x, x|], [|o, o, o|]|];
-    let next_grid = [|[|o, o, o|], [|x, o, x|], [|o, o, o|]|];
-    let tile_position = (1, 1);
+    let nextGrid = [|[|o, o, o|], [|x, o, x|], [|o, o, o|]|];
+    let tilePosition = (1, 1);
 
     test("should toggle the middle cell", () =>
-      expect(grid->Game.toggleTile(tile_position)) |> toEqual(next_grid)
+      expect(grid->Game.toggleTile(tilePosition)) |> toEqual(nextGrid)
     );
 
     test("should revert the middle cell to its original state", () =>
-      expect(next_grid->Game.toggleTile(tile_position)) |> toEqual(grid)
+      expect(nextGrid->Game.toggleTile(tilePosition)) |> toEqual(grid)
     );
   });
 
@@ -52,7 +53,8 @@ describe("Game", () => {
         [|o, o, o, o, o|],
         [|o, o, o, o, o|],
       |];
-      let next_grid = [|
+
+      let nextGrid = [|
         [|o, o, o, o, o|],
         [|o, o, x, o, o|],
         [|o, o, x, o, o|],
@@ -61,11 +63,11 @@ describe("Game", () => {
       |];
 
       test("should transform a horizontal to a vertical line", () =>
-        expect(grid |> Game.nextGeneration(ref(0))) |> toEqual(next_grid)
+        expect(grid->Game.nextGeneration) |> toEqual(nextGrid)
       );
 
       test("should revert a vertical line to a horizontal one", () =>
-        expect(next_grid |> Game.nextGeneration(ref(0))) |> toEqual(grid)
+        expect(nextGrid->Game.nextGeneration) |> toEqual(grid)
       );
     });
 
@@ -77,7 +79,8 @@ describe("Game", () => {
         [|o, o, o, o, o|],
         [|o, o, o, o, o|],
       |];
-      let next_grid = [|
+
+      let nextGrid = [|
         [|o, o, o, o, o|],
         [|x, o, x, o, o|],
         [|o, x, x, o, o|],
@@ -86,7 +89,7 @@ describe("Game", () => {
       |];
 
       test("should move a glider to the next step", () =>
-        expect(grid |> Game.nextGeneration(ref(0))) |> toEqual(next_grid)
+        expect(grid->Game.nextGeneration) |> toEqual(nextGrid)
       );
     });
   });

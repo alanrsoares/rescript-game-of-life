@@ -2,7 +2,6 @@ type state = {
   grid: Game.grid,
   isPlaying: bool,
   animationFrameId: ref(int),
-  score: ref(int),
   startedAt: option(float),
   ticks: int,
   frameRate: int,
@@ -24,26 +23,18 @@ let initialState = {
   grid: Game.makeRandomGrid(boardSize, makeSeed()),
   isPlaying: false,
   animationFrameId: ref(0),
-  score: ref(0),
   startedAt: None,
   ticks: 0,
   frameRate: 0,
 };
 
 module Reducers = {
-  let grid = (self, action, state): Game.grid =>
+  let grid = (self, action, _state): Game.grid =>
     switch (action) {
     | Random => Game.makeRandomGrid(boardSize, makeSeed())
     | Reset => Game.makeBlankGrid(30)
-    | Tick => Game.nextGeneration(state.score, self)
+    | Tick => Game.nextGeneration(self)
     | Toggle(position) => self->Game.toggleTile(position)
-    | _ => self
-    };
-
-  let score = (self, action, _state) =>
-    switch (action) {
-    | Random => ref(0)
-    | Reset => ref(0)
     | _ => self
     };
 
@@ -80,7 +71,6 @@ module Reducers = {
     animationFrameId: state.animationFrameId,
     grid: grid(state.grid, action, state),
     isPlaying: isPlaying(state.isPlaying, action, state),
-    score: score(state.score, action, state),
     startedAt: startedAt(state.startedAt, action, state),
     ticks: ticks(state.ticks, action, state),
     frameRate: frameRate(state.frameRate, action, state),
