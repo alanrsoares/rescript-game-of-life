@@ -30,7 +30,7 @@ describe("Game", () => {
     })
   );
 
-  describe("toggle_cell", () => {
+  describe("toggleTile", () => {
     let grid = [|[|o, o, o|], [|x, x, x|], [|o, o, o|]|];
     let nextGrid = [|[|o, o, o|], [|x, o, x|], [|o, o, o|]|];
     let tilePosition = (1, 1);

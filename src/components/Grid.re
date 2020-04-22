@@ -10,6 +10,8 @@ module Wrapper = [%stiled.div
 
 [@react.component]
 let make = (~data: Game.grid, ~onToggle) => {
+  open Belt.Array;
+
   let renderTile =
     React.useCallback1(
       (y, x, cellState: Game.cellState) =>
@@ -24,9 +26,9 @@ let make = (~data: Game.grid, ~onToggle) => {
   let renderRow =
     React.useCallback0((y, row) =>
       <div key=y->string_of_int>
-        {row->Belt.Array.mapWithIndex(renderTile(y)) |> arr}
+        {row->mapWithIndex(renderTile(y)) |> arr}
       </div>
     );
 
-  <Wrapper> {data->Belt.Array.mapWithIndex(renderRow) |> arr} </Wrapper>;
+  <Wrapper> {data->mapWithIndex(renderRow) |> arr} </Wrapper>;
 };
