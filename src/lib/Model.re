@@ -13,7 +13,7 @@ type action =
   | Start
   | Stop
   | Tick
-  | Toggle(Game.position);
+  | Toggle(Game.point);
 
 let makeSeed = () => Js.Date.now()->int_of_float;
 

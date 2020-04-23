@@ -4,16 +4,20 @@ type cellState =
 
 type grid = array(array(cellState));
 
-type position = (int, int);
+type point = (int, int);
 
-let safeIndex = (len, i) => i < 0 ? len - 1 : i === len ? 0 : i;
+let safeIndex =
+  fun
+  | (length, i) when i < 0 => length - 1
+  | (length, i) when i === length => 0
+  | (_, i) => i;
 
-let safePosition = ((y, x): position, len): position => (
-  safeIndex(len, y),
-  safeIndex(len, x),
+let safePoint = ((y, x): point, length: int): point => (
+  (length, y)->safeIndex,
+  (length, x)->safeIndex,
 );
 
-let mapGrid = (fn: (position, cellState, grid) => cellState, grid): grid =>
+let mapGrid = (fn: (point, cellState, grid) => cellState, grid): grid =>
   Belt.Array.(
     mapWithIndex(grid, (y, row) =>
       row->mapWithIndex((x, tile) => fn((y, x), tile, grid))
@@ -30,15 +34,15 @@ let makeRandomGrid = (size: int, seed: int): grid => {
   |> mapGrid((_, _, _) => Random.int(10) > 7 ? Alive : Dead);
 };
 
-let getTile = (grid, position): cellState => {
-  let (y, x) = position->safePosition(grid->Belt.Array.length);
+let getTile = (grid, point): cellState => {
+  let (y, x) = point->safePoint(grid->Belt.Array.length);
 
   grid[y][x];
 };
 
 let offset = [(-1), 0, 1];
 
-let getNeighbours = (grid, (y, x): position): list(cellState) =>
+let getNeighbours = (grid, (y, x): point): list(cellState) =>
   Belt.List.(
     offset
     ->map(y' => offset->map(x' => (y + y', x + x')))
@@ -47,11 +51,11 @@ let getNeighbours = (grid, (y, x): position): list(cellState) =>
     ->map(grid->getTile)
   );
 
-let countLivingNeighbours = (grid, position): int =>
-  Belt.List.(grid->getNeighbours(position)->keep(c => c == Alive)->length);
+let countLivingNeighbours = (grid, point): int =>
+  Belt.List.(grid->getNeighbours(point)->keep(c => c == Alive)->length);
 
-let nextState = (position, cellState, grid) => {
-  let neighbours = grid->countLivingNeighbours(position);
+let nextState = (point, cellState, grid) => {
+  let neighbours = grid->countLivingNeighbours(point);
 
   switch (cellState, neighbours) {
   | (Alive, 2 | 3) => Alive
@@ -62,11 +66,11 @@ let nextState = (position, cellState, grid) => {
 
 let nextGeneration = mapGrid(nextState);
 
-let toggleTile = (grid, position) => {
+let toggleTile = (grid, point) => {
   open Belt.Array;
 
   let grid' = grid->map(copy);
-  let (y, x) = position->safePosition(grid->length);
+  let (y, x) = point->safePoint(grid->length);
   let tile = grid'[y][x];
 
   grid'[y][x] = (
