@@ -13,8 +13,6 @@ let avgFrameRate = (ticks, startedAt) =>
     /. ((Js.Date.now() -. startedAt) /. float_of_int(1000)),
   );
 
-let makeStyle = ReactDOMRe.Style.make;
-
 module Colors = {
   let sqrSize = Config.boardSize * Config.boardSize;
 
@@ -22,22 +20,25 @@ module Colors = {
   let diagonalLength = Js.Math.sqrt(sumOfSquares);
   let hueIncrement = 360. /. diagonalLength;
 
-  type memo = Hashtbl.t((int, int), string);
-
-  let cache = Hashtbl.create(~random=true, sqrSize);
+  let colorCache = Belt.HashMap.String.make(~hintSize=sqrSize);
 
   let rainbowHSL = (y, x) => {
+    let cacheKey = {j|$y-$x|j};
+
     let (color, cached) =
-      switch (Hashtbl.find(cache, (y, x))) {
-      | f => (f, true)
-      | exception Not_found =>
+      switch (colorCache->Belt.HashMap.String.get(cacheKey)) {
+      | Some(found) => (found, true)
+      | None =>
         let sumOfPoints = (y * y + x * x)->float_of_int;
-        let h = Js.Math.floor(Js.Math.sqrt(sumOfPoints) *. hueIncrement);
-        ({j|hsl($h, 100%, 60%)|j}, false);
+        let raw = Js.Math.sqrt(sumOfPoints) *. hueIncrement;
+        let h = raw->Js.Math.floor;
+        let color = {j|hsl($h, 100%, 60%)|j};
+
+        (color, false);
       };
 
     if (!cached) {
-      Hashtbl.add(cache, (y, x), color);
+      colorCache->Belt.HashMap.String.set(cacheKey, color);
     };
 
     color;
