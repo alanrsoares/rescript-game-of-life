@@ -14,8 +14,10 @@ module Wrapper = [%styled.div
 ];
 
 [@react.component]
-let make = (~isAlive, ~onToggle) => {
-  let background = isAlive ? "#FFFFFF" : "#272B30";
+let make = (~isAlive, ~onToggle, ~y, ~x) => {
+  let aliveColor = Util.Colors.rainbowHSL(y, x);
+  let deadColor = "#272B30";
+  let background = isAlive ? aliveColor : deadColor;
 
   let handleMouseEvent =
     React.useCallback0((callback, e) =>
@@ -28,6 +30,6 @@ let make = (~isAlive, ~onToggle) => {
     onMouseOver={handleMouseEvent(onToggle)}
     onMouseDown={handleMouseEvent(onToggle)}
     background
-    shadow={isAlive ? "0 0 2px 1px wheat" : ""}
+    shadow={isAlive ? {j|0 0 2px 1px $aliveColor|j} : ""}
   />;
 };

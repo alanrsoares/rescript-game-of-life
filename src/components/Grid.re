@@ -17,8 +17,10 @@ let make = (~data: Game.grid, ~onToggle) => {
       (y, x, cellState: Game.cellState) =>
         <Tile
           isAlive={cellState === Game.Alive}
-          key=x->string_of_int
+          key={j|$x-$y|j}
           onToggle={_ => onToggle(y, x)}
+          y
+          x
         />,
       [|onToggle|],
     );

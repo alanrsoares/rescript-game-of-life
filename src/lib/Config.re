@@ -1,0 +1,1 @@
+let boardSize = 29;

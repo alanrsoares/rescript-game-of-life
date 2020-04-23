@@ -17,10 +17,8 @@ type action =
 
 let makeSeed = () => Js.Date.now()->int_of_float;
 
-let boardSize = 30;
-
 let initialState = {
-  grid: Game.makeRandomGrid(boardSize, makeSeed()),
+  grid: Game.makeRandomGrid(Config.boardSize, makeSeed()),
   isPlaying: false,
   animationFrameId: ref(0),
   startedAt: None,
@@ -31,8 +29,8 @@ let initialState = {
 module Reducers = {
   let grid = (self, action, _state): Game.grid =>
     switch (action) {
-    | Random => Game.makeRandomGrid(boardSize, makeSeed())
-    | Reset => Game.makeBlankGrid(30)
+    | Random => Game.makeRandomGrid(Config.boardSize, makeSeed())
+    | Reset => Game.makeBlankGrid(Config.boardSize)
     | Tick => Game.nextGeneration(self)
     | Toggle(position) => self->Game.toggleTile(position)
     | _ => self
