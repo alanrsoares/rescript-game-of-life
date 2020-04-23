@@ -24,11 +24,11 @@ module Colors = {
 
   type memo = Hashtbl.t((int, int), string);
 
-  let m = Hashtbl.create(~random=true, sqrSize);
+  let cache = Hashtbl.create(~random=true, sqrSize);
 
   let rainbowHSL = (y, x) => {
     let (color, cached) =
-      switch (Hashtbl.find(m, (y, x))) {
+      switch (Hashtbl.find(cache, (y, x))) {
       | f => (f, true)
       | exception Not_found =>
         let sumOfPoints = (y * y + x * x)->float_of_int;
@@ -37,7 +37,7 @@ module Colors = {
       };
 
     if (!cached) {
-      Hashtbl.add(m, (y, x), color);
+      Hashtbl.add(cache, (y, x), color);
     };
 
     color;
