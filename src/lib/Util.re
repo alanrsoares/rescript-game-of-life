@@ -27,7 +27,7 @@ module Colors = {
   let m = Hashtbl.create(~random=true, sqrSize);
 
   let rainbowHSL = (y, x) => {
-    let (color, found) =
+    let (color, cached) =
       switch (Hashtbl.find(m, (y, x))) {
       | f => (f, true)
       | exception Not_found =>
@@ -35,7 +35,8 @@ module Colors = {
         let h = Js.Math.floor(Js.Math.sqrt(sumOfPoints) *. hueIncrement);
         ({j|hsl($h, 100%, 60%)|j}, false);
       };
-    if (!found) {
+
+    if (!cached) {
       Hashtbl.add(m, (y, x), color);
     };
 
