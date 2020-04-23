@@ -50,7 +50,7 @@ let getNeighbours = (grid, (y, x): position): list(cellState) =>
 let countLivingNeighbours = (grid, position): int =>
   Belt.List.(grid->getNeighbours(position)->keep(c => c == Alive)->length);
 
-let nextState = (position, cellState: cellState, grid) => {
+let nextState = (position, cellState, grid) => {
   let neighbours = grid->countLivingNeighbours(position);
 
   switch (cellState, neighbours) {
