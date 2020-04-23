@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/reason-game-of-life/static/css/main.3fc39681.chunk.css",
-    "main.js": "/reason-game-of-life/static/js/main.42d76e81.chunk.js",
-    "main.js.map": "/reason-game-of-life/static/js/main.42d76e81.chunk.js.map",
+    "main.css": "/reason-game-of-life/static/css/main.56e99ca1.chunk.css",
+    "main.js": "/reason-game-of-life/static/js/main.d52992fb.chunk.js",
+    "main.js.map": "/reason-game-of-life/static/js/main.d52992fb.chunk.js.map",
     "runtime-main.js": "/reason-game-of-life/static/js/runtime-main.13ccb877.js",
     "runtime-main.js.map": "/reason-game-of-life/static/js/runtime-main.13ccb877.js.map",
     "static/css/2.0b4d0981.chunk.css": "/reason-game-of-life/static/css/2.0b4d0981.chunk.css",
     "static/js/2.040aaf70.chunk.js": "/reason-game-of-life/static/js/2.040aaf70.chunk.js",
     "static/js/2.040aaf70.chunk.js.map": "/reason-game-of-life/static/js/2.040aaf70.chunk.js.map",
     "index.html": "/reason-game-of-life/index.html",
-    "precache-manifest.1a470d916f0ec0bb6658e615943a5320.js": "/reason-game-of-life/precache-manifest.1a470d916f0ec0bb6658e615943a5320.js",
+    "precache-manifest.9a8441bb641a935372daa13c8a7ff4da.js": "/reason-game-of-life/precache-manifest.9a8441bb641a935372daa13c8a7ff4da.js",
     "service-worker.js": "/reason-game-of-life/service-worker.js",
     "static/css/2.0b4d0981.chunk.css.map": "/reason-game-of-life/static/css/2.0b4d0981.chunk.css.map",
-    "static/css/main.3fc39681.chunk.css.map": "/reason-game-of-life/static/css/main.3fc39681.chunk.css.map",
+    "static/css/main.56e99ca1.chunk.css.map": "/reason-game-of-life/static/css/main.56e99ca1.chunk.css.map",
     "static/js/2.040aaf70.chunk.js.LICENSE.txt": "/reason-game-of-life/static/js/2.040aaf70.chunk.js.LICENSE.txt",
     "static/media/all.css": "/reason-game-of-life/static/media/fa-solid-900.ec763292.svg"
   },
@@ -20,7 +20,7 @@
     "static/js/runtime-main.13ccb877.js",
     "static/css/2.0b4d0981.chunk.css",
     "static/js/2.040aaf70.chunk.js",
-    "static/css/main.3fc39681.chunk.css",
-    "static/js/main.42d76e81.chunk.js"
+    "static/css/main.56e99ca1.chunk.css",
+    "static/js/main.d52992fb.chunk.js"
   ]
 }
