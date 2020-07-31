@@ -7,13 +7,13 @@ let make = () => {
   let (state, dispatch) = React.useReducer(Reducers.root, initialState);
 
   let handleToggleTile =
-    React.useCallback0((y, x) => dispatch(Toggle((y, x))));
-  let handleReset = React.useCallback0(_ => dispatch(Reset));
-  let handleRandom = React.useCallback0(_ => dispatch(Random));
-  let handleTick = React.useCallback0(_ => dispatch(Tick));
-
+    React.useCallback1((y, x) => dispatch(Toggle((y, x))), [|dispatch|]);
+  let handleReset = React.useCallback1(_ => dispatch(Reset), [|dispatch|]);
+  let handleRandom =
+    React.useCallback1(_ => dispatch(Random), [|dispatch|]);
+  let handleTick = React.useCallback1(_ => dispatch(Tick), [|dispatch|]);
   let handleToggleAutoPlay =
-    React.useCallback2(
+    React.useCallback3(
       _ => {
         let rec play = () => {
           state.animationFrameId := requestAnimationFrame(play);
@@ -27,7 +27,7 @@ let make = () => {
           dispatch(Start);
         };
       },
-      (state.animationFrameId, state.isPlaying),
+      (state.animationFrameId, state.isPlaying, dispatch),
     );
 
   <Root>
@@ -43,9 +43,9 @@ let make = () => {
       <Grid data={state.grid} onToggle=handleToggleTile />
       <div>
         (
-          state.isPlaying ?
-            "avg update rate: " ++ state.frameRate->string_of_int ++ " fps" :
-            ""
+          state.isPlaying
+            ? "avg update rate: " ++ state.frameRate->string_of_int ++ " fps"
+            : ""
         )
         ->str
       </div>

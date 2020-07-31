@@ -26,10 +26,12 @@ let make = (~data: Game.grid, ~onToggle) => {
     );
 
   let renderRow =
-    React.useCallback0((y, row) =>
-      <div key=y->string_of_int>
-        {row->mapWithIndex(renderTile(y)) |> arr}
-      </div>
+    React.useCallback1(
+      (y, row) =>
+        <div key={y->string_of_int}>
+          {row->mapWithIndex(renderTile(y)) |> arr}
+        </div>,
+      [|renderTile|],
     );
 
   <Wrapper> {data->mapWithIndex(renderRow) |> arr} </Wrapper>;

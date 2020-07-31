@@ -5,7 +5,7 @@ module Wrapper = [%styled.div
     margin: 1px;
     background: $background;
     border-radius: 50%;
-    transition-property: background;
+    transition-property: "all";
     transition-duration: .1s;
     transition-timing-function: ease-in-out;
     cursor: pointer;
