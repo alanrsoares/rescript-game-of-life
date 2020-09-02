@@ -1,10 +1,10 @@
-module Root = [%styled.div {|
+module Root = %styled.div(`
   display: flex;
   color: white;
-|}];
+`)
 
-module AppBar = [%styled.div
-  {|
+module AppBar = %styled.div(
+  `
     display: flex;
     text-align: center;
     justify-content: center;
@@ -12,23 +12,23 @@ module AppBar = [%styled.div
     padding-top: 2rem;
     font-size: 2rem;
     line-height: 1rem;
-  |}
-];
+  `
+)
 
-module Content = [%styled.div {|
+module Content = %styled.div(`
   width: 100%;
-|}];
+`)
 
 module Icon = {
-  [@react.component]
-  let make = (~name) => <i className={"fas fa-" ++ name} />;
-};
+  @react.component
+  let make = (~name) => <i className={"fas fa-" ++ name} />
+}
 
 module Button = {
-  [@react.component]
+  @react.component
   let make = (~label, ~background, ~onClick, ~disabled=false, ~children) => {
-    let className = [%css
-      {j|
+    let className = %css(
+      j`
         font-size: .9rem;
         padding: .5rem .8rem;
         background-color: $background;
@@ -42,19 +42,19 @@ module Button = {
         outline: 0rem none white;
         font-weight: 700;
         cursor: pointer;
-      |j}
-    ];
+      `
+    )
 
-    <button ariaLabel=label className disabled onClick> children </button>;
-  };
-};
+    <button ariaLabel=label className disabled onClick> children </button>
+  }
+}
 
 module ToggleButton = {
-  [@react.component]
+  @react.component
   let make = (~isToggled, ~onClick, ~label, ~disabled=false) => {
-    let background = isToggled ? "#666" : "#7A8288";
-    let name = isToggled ? "pause" : "play";
+    let background = isToggled ? "#666" : "#7A8288"
+    let name = isToggled ? "pause" : "play"
 
-    <Button label background onClick disabled> <Icon name /> </Button>;
-  };
-};
+    <Button label background onClick disabled> <Icon name /> </Button>
+  }
+}

@@ -1,11 +1,11 @@
 type state = {
   grid: Game.grid,
   isPlaying: bool,
-  animationFrameId: ref(int),
-  startedAt: option(float),
+  animationFrameId: ref<int>,
+  startedAt: option<float>,
   ticks: int,
   frameRate: int,
-};
+}
 
 type action =
   | Random
@@ -13,9 +13,9 @@ type action =
   | Start
   | Stop
   | Tick
-  | Toggle(Game.point);
+  | Toggle(Game.point)
 
-let makeSeed = () => Js.Date.now()->int_of_float;
+let makeSeed = () => Js.Date.now()->int_of_float
 
 let initialState = {
   grid: Game.makeRandomGrid(Config.boardSize, makeSeed()),
@@ -24,31 +24,31 @@ let initialState = {
   startedAt: None,
   ticks: 0,
   frameRate: 0,
-};
+}
 
 module Reducers = {
   let grid = (self, action, _state): Game.grid =>
-    switch (action) {
+    switch action {
     | Random => Game.makeRandomGrid(Config.boardSize, makeSeed())
     | Reset => Game.makeBlankGrid(Config.boardSize)
     | Tick => Game.nextGeneration(self)
     | Toggle(position) => self->Game.toggleTile(position)
     | _ => self
-    };
+    }
 
   let isPlaying = (self, action, _state) =>
-    switch (action) {
+    switch action {
     | Start => true
     | Stop => false
     | _ => self
-    };
+    }
 
   let startedAt = (self, action, _state) =>
-    switch (action) {
+    switch action {
     | Start => Some(Js.Date.now())
     | Stop => None
     | _ => self
-    };
+    }
 
   let ticks = (self, action, state) =>
     switch (action, state.isPlaying) {
@@ -56,14 +56,14 @@ module Reducers = {
     | (Stop, _) => 0
     | (Tick, true) => self + 1
     | _ => self
-    };
+    }
 
   let frameRate = (self, action, state) =>
     switch (action, state.startedAt) {
     | (Stop, _) => 0
     | (Tick, Some(startedAt)) => Util.avgFrameRate(state.ticks, startedAt)
     | _ => self
-    };
+    }
 
   let root = (state, action) => {
     animationFrameId: state.animationFrameId,
@@ -72,5 +72,5 @@ module Reducers = {
     startedAt: startedAt(state.startedAt, action, state),
     ticks: ticks(state.ticks, action, state),
     frameRate: frameRate(state.frameRate, action, state),
-  };
-};
+  }
+}

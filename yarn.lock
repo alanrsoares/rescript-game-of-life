@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@ahrefs/bs-emotion@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@ahrefs/bs-emotion/-/bs-emotion-1.0.1.tgz#8fbca5b5ee14a4db21e965d67a2e4053f6f825ea"
-  integrity sha512-oUSKPX/JZ3UDSrdlNj8cesO7yuxwnxS6PvHK3ZA0uI69jkwGJY7ZUDxzYWRg6x/6fZ8qGSSUEoq/moBmwmpjUg==
+"@ahrefs/bs-emotion@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@ahrefs/bs-emotion/-/bs-emotion-2.0.0.tgz#7a9ad34d0dca0864bb546cd4c36ba3c489d71adf"
+  integrity sha512-Zua8U35J6CesTnAGZeAAuQDpvS9egHCZqMlpOFSNTCCcaQeGzkdwfBY3Y7BI28kvXjCSVdMnU917l7El+JJmkw==
   dependencies:
     "@minima.app/re-css" "1.0.1"
     emotion "9.2.12"
@@ -3067,10 +3067,10 @@ browserslist@^4.0.0, browserslist@^4.12.0, browserslist@^4.6.2, browserslist@^4.
     escalade "^3.0.2"
     node-releases "^1.1.60"
 
-bs-platform@7.3.2:
-  version "7.3.2"
-  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-7.3.2.tgz#301f5c9b4e8cf5713cb60ca22e145e56e793affe"
-  integrity sha512-seJL5g4anK9la4erv+B2o2sMHQCxDF6OCRl9en3hbaUos/S3JsusQ0sPp4ORsbx5eXfHLYBwPljwKXlgpXtsgQ==
+bs-platform@8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-8.2.0.tgz#f3f4c06d5710a4c782f0ed030b1fe11e74a0a6d7"
+  integrity sha512-quvmUac/ZxGDsT7L5+6RNXrLPvLHkWFownacaqlwVoyAm770bPyupTRU49ALPGk3HpjfD5eE+lpGdOSPtuwJiA==
 
 bser@2.1.1:
   version "2.1.1"
