@@ -2,7 +2,7 @@
 
 An educational implementation of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) in [Reason](https://reasonml.github.io/) using [ReasonReact](https://reasonml.github.io/reason-react/) and [styled-ppx](https://github.com/davesnx/styled-ppx).
 
-![demo](./conways-game-of-life.gif)
+[![demo](./conways-game-of-life.gif)](https://alanrsoares.github.io/reason-game-of-life)
 
 Live demo at [here](https://alanrsoares.github.io/reason-game-of-life).
 
