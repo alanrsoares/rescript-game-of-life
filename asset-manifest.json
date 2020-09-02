@@ -1,26 +1,26 @@
 {
   "files": {
     "main.css": "/reason-game-of-life/static/css/main.3fc39681.chunk.css",
-    "main.js": "/reason-game-of-life/static/js/main.dee7ca44.chunk.js",
-    "main.js.map": "/reason-game-of-life/static/js/main.dee7ca44.chunk.js.map",
-    "runtime-main.js": "/reason-game-of-life/static/js/runtime-main.13ccb877.js",
-    "runtime-main.js.map": "/reason-game-of-life/static/js/runtime-main.13ccb877.js.map",
-    "static/css/2.0b4d0981.chunk.css": "/reason-game-of-life/static/css/2.0b4d0981.chunk.css",
-    "static/js/2.ec62b75e.chunk.js": "/reason-game-of-life/static/js/2.ec62b75e.chunk.js",
-    "static/js/2.ec62b75e.chunk.js.map": "/reason-game-of-life/static/js/2.ec62b75e.chunk.js.map",
+    "main.js": "/reason-game-of-life/static/js/main.c085db70.chunk.js",
+    "main.js.map": "/reason-game-of-life/static/js/main.c085db70.chunk.js.map",
+    "runtime-main.js": "/reason-game-of-life/static/js/runtime-main.cd2d3284.js",
+    "runtime-main.js.map": "/reason-game-of-life/static/js/runtime-main.cd2d3284.js.map",
+    "static/css/2.6889ea3f.chunk.css": "/reason-game-of-life/static/css/2.6889ea3f.chunk.css",
+    "static/js/2.5b8069c3.chunk.js": "/reason-game-of-life/static/js/2.5b8069c3.chunk.js",
+    "static/js/2.5b8069c3.chunk.js.map": "/reason-game-of-life/static/js/2.5b8069c3.chunk.js.map",
     "index.html": "/reason-game-of-life/index.html",
-    "precache-manifest.b6ec1d3a578043cc64c2a2885bf4bdf0.js": "/reason-game-of-life/precache-manifest.b6ec1d3a578043cc64c2a2885bf4bdf0.js",
+    "precache-manifest.067d8700eacf5eee94ee777bb095b249.js": "/reason-game-of-life/precache-manifest.067d8700eacf5eee94ee777bb095b249.js",
     "service-worker.js": "/reason-game-of-life/service-worker.js",
-    "static/css/2.0b4d0981.chunk.css.map": "/reason-game-of-life/static/css/2.0b4d0981.chunk.css.map",
+    "static/css/2.6889ea3f.chunk.css.map": "/reason-game-of-life/static/css/2.6889ea3f.chunk.css.map",
     "static/css/main.3fc39681.chunk.css.map": "/reason-game-of-life/static/css/main.3fc39681.chunk.css.map",
-    "static/js/2.ec62b75e.chunk.js.LICENSE.txt": "/reason-game-of-life/static/js/2.ec62b75e.chunk.js.LICENSE.txt",
-    "static/media/all.css": "/reason-game-of-life/static/media/fa-solid-900.ec763292.svg"
+    "static/js/2.5b8069c3.chunk.js.LICENSE.txt": "/reason-game-of-life/static/js/2.5b8069c3.chunk.js.LICENSE.txt",
+    "static/media/all.css": "/reason-game-of-life/static/media/fa-solid-900.ee09ad75.woff"
   },
   "entrypoints": [
-    "static/js/runtime-main.13ccb877.js",
-    "static/css/2.0b4d0981.chunk.css",
-    "static/js/2.ec62b75e.chunk.js",
+    "static/js/runtime-main.cd2d3284.js",
+    "static/css/2.6889ea3f.chunk.css",
+    "static/js/2.5b8069c3.chunk.js",
     "static/css/main.3fc39681.chunk.css",
-    "static/js/main.dee7ca44.chunk.js"
+    "static/js/main.c085db70.chunk.js"
   ]
 }
