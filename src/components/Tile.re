@@ -1,8 +1,8 @@
 module Wrapper = [%styled.div
   (~background, ~shadow) => {j|
-    width: .9rem;
-    height: .9rem;
-    margin: 1px;
+    width: 1rem;
+    height: 1rem;
+    margin: .125rem;
     background: $background;
     border-radius: 50%;
     transition-property: "all";
@@ -30,6 +30,6 @@ let make = (~isAlive, ~onToggle, ~y, ~x) => {
     onMouseOver={handleMouseEvent(onToggle)}
     onMouseDown={handleMouseEvent(onToggle)}
     background
-    shadow={isAlive ? {j|0 0 2px 1px $aliveColor|j} : ""}
+    shadow={isAlive ? {j|0 0 1.5px 1px $aliveColor|j} : ""}
   />;
 };

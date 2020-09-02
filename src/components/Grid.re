@@ -3,8 +3,9 @@ open Util;
 module Wrapper = [%stiled.div
   {|
     display: flex;
-    border: .2em solid black;
-    border-radius: .5em;
+    border: .25rem solid #222;
+    border-radius: .75rem;
+    padding: .125rem;
   |}
 ];
 
