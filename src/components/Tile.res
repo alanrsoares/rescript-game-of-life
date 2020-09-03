@@ -1,11 +1,12 @@
 module Wrapper = %styled.div(
-  (~background, ~shadow) =>
+  (~background, ~shadow, ~tileSize) =>
     j`
-    width: 1rem;
-    height: 1rem;
-    margin: .125rem;
+    width: $tileSize;
+    height: $tileSize;
     background: $background;
     border-radius: 50%;
+    margin: 2px 1px;
+    padding: 0;
     transition-property: "all";
     transition-duration: .1s;
     transition-timing-function: ease-in-out;
@@ -18,7 +19,7 @@ module Wrapper = %styled.div(
 let make = (~isAlive, ~onToggle, ~y, ~x) => {
   let aliveColor = Util.Colors.rainbowHSL(y, x)
   let deadColor = "#272B30"
-  let background = isAlive ? aliveColor : deadColor
+  let (background, shadow) = isAlive ? (aliveColor, j`0 0 0 0 $aliveColor`) : (deadColor, "")
 
   let handleMouseEvent = React.useCallback0((callback, e) =>
     if ReactEvent.Mouse.nativeEvent(e)["which"] === 1 {
@@ -27,9 +28,10 @@ let make = (~isAlive, ~onToggle, ~y, ~x) => {
   )
 
   <Wrapper
+    background
+    shadow
     onMouseOver={handleMouseEvent(onToggle)}
     onMouseDown={handleMouseEvent(onToggle)}
-    background
-    shadow={isAlive ? j`0 0 1.5px 1px $aliveColor` : ""}
+    tileSize=Config.tileSize
   />
 }

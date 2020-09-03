@@ -1,1 +1,2 @@
-let boardSize = 29
+let boardSize = 32
+let tileSize = ".75rem"
