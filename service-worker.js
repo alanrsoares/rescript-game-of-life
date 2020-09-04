@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/reason-game-of-life/precache-manifest.88b8554bd44d17baa03b1bf92e773e9b.js"
+  "/reason-game-of-life/precache-manifest.6e01aeccef7633b9aba7e28289f896cd.js"
 );
 
 self.addEventListener('message', (event) => {
