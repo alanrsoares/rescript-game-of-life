@@ -27,6 +27,10 @@ module Icon = {
 module Button = {
   @react.component
   let make = (~label, ~background, ~onClick, ~disabled=false, ~children) => {
+    let shadow = Util.Colors.opacify(-0.4, background);
+    let pseudoOutline = j`0 0 0 4px $shadow`
+    let transition = "all .15s ease-in"
+
     let className = %css(
       j`
         font-size: .9rem;
@@ -42,6 +46,11 @@ module Button = {
         outline: 0rem none white;
         font-weight: 700;
         cursor: pointer;
+        transition: $transition;
+        :focus {
+          box-shadow: $pseudoOutline;
+          opacity: .9;
+        }
       `
     )
 
@@ -54,6 +63,7 @@ module ToggleButton = {
   let make = (~isToggled, ~onClick, ~label, ~disabled=false) => {
     let background = isToggled ? "#666" : "#7A8288"
     let name = isToggled ? "pause" : "play"
+    
 
     <Button label background onClick disabled> <Icon name /> </Button>
   }

@@ -10,6 +10,9 @@ let avgFrameRate = (ticks, startedAt) =>
   Js.Math.ceil(ticks->float_of_int /. ((Js.Date.now() -. startedAt) /. float_of_int(1000)))
 
 module Colors = {
+  @bs.module("polished")
+  external opacify: (float, string) => string = "opacify"
+
   let sqrSize = Config.boardSize * Config.boardSize
 
   let sumOfSquares = (sqrSize * 2)->float_of_int
