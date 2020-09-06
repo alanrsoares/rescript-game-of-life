@@ -1,7 +1,8 @@
 @bs.val
 external requestAnimationFrame: (unit => unit) => int = "requestAnimationFrame"
 
-@bs.val external cancelAnimationFrame: int => unit = "cancelAnimationFrame"
+@bs.val
+external cancelAnimationFrame: int => unit = "cancelAnimationFrame"
 
 let str = ReasonReact.string
 let arr = ReasonReact.array
