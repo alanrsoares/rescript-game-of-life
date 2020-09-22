@@ -24,6 +24,10 @@ let make = () => {
     }
   }, (state.animationFrameId, state.isPlaying, dispatch))
 
+  let label = state.isPlaying
+    ? "avg update rate: " ++ (state.frameRate->string_of_int ++ " fps")
+    : ""
+
   <Root>
     <Content>
       <AppBar> {"Conway's Game of Life"->str} </AppBar>
@@ -35,11 +39,7 @@ let make = () => {
         onToggleAutoplay=handleToggleAutoPlay
       />
       <Grid data=state.grid onToggle=handleToggleTile />
-      <div>
-        {(
-          state.isPlaying ? "avg update rate: " ++ (state.frameRate->string_of_int ++ " fps") : ""
-        )->str}
-      </div>
+      <div> {label->str} </div>
     </Content>
   </Root>
 }
