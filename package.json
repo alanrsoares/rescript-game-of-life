@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.1",
-    "polished": "^4.0.3",
+    "polished": "^4.0.5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "reason-react": "^0.9.1"
@@ -27,7 +27,7 @@
     "@glennsl/bs-jest": "^0.6.0",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
-    "@testing-library/user-event": "^12.2.2",
+    "@testing-library/user-event": "^12.3.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "bs-platform": "^8.3.3",
