@@ -1,4 +1,4 @@
-# Reason Game of Life
+# Rescript Game of Life
 
 An educational implementation of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) in [ReScript](https://rescript-lang.org/) using [ReasonReact](https://reasonml.github.io/reason-react/) and [styled-ppx](https://github.com/davesnx/styled-ppx).
 
@@ -11,7 +11,7 @@ Live demo at [here](https://alanrsoares.github.io/reason-game-of-life).
 Clone the repository:
 
 ```
-git clone git@github.com:alanrsoares/reason-game-of-life.git
+git clone git@github.com:alanrsoares/rescript-game-of-life.git
 ```
 
 Install dependencies:
