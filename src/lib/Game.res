@@ -6,6 +6,9 @@ type grid = array<array<cellState>>
 
 type point = (int, int)
 
+module L = Belt.List
+module A = Belt.Array
+
 let safeIndex = x =>
   switch x {
   | (length, i) when i < 0 => length - 1
@@ -19,22 +22,20 @@ let safePoint = ((y, x): point, length: int): point => (
 )
 
 let mapGrid = (fn: (point, cellState, grid) => cellState, grid): grid => {
-  open Belt.Array
-  mapWithIndex(grid, (y, row) => row->mapWithIndex((x, tile) => fn((y, x), tile, grid)))
+  A.mapWithIndex(grid, (y, row) => row->A.mapWithIndex((x, tile) => fn((y, x), tile, grid)))
 }
 
 let makeBlankGrid = (size': int): grid => {
-  open Belt.Array
-  make(size', make(size', Dead))
+  A.make(size', A.make(size', Dead))
 }
 
 let makeRandomGrid = (size: int, seed: int): grid => {
   Random.init(seed)
-  size |> makeBlankGrid |> mapGrid((_, _, _) => Random.int(10) > 7 ? Alive : Dead)
+  size->makeBlankGrid |> mapGrid((_, _, _) => Random.int(10) > 7 ? Alive : Dead)
 }
 
 let getTile = (grid, point): cellState => {
-  let (y, x) = point->safePoint(grid->Belt.Array.length)
+  let (y, x) = point->safePoint(grid->A.length)
 
   grid[y][x]
 }
@@ -42,17 +43,15 @@ let getTile = (grid, point): cellState => {
 let offset = list{-1, 0, 1}
 
 let getNeighbours = (grid, (y, x): point): list<cellState> => {
-  open Belt.List
   offset
-  ->map(y' => offset->map(x' => (y + y', x + x')))
-  ->flatten
-  ->keep(p => p != (y, x))
-  ->map(grid->getTile)
+  ->L.map(y' => offset->L.map(x' => (y + y', x + x')))
+  ->L.flatten
+  ->L.keep(p => p != (y, x))
+  ->L.map(grid->getTile)
 }
 
 let countLivingNeighbours = (grid, point): int => {
-  open Belt.List
-  grid->getNeighbours(point)->keep(c => c == Alive)->length
+  grid->getNeighbours(point)->L.keep(c => c == Alive)->L.length
 }
 
 let nextState = (point, cellState, grid) => {
@@ -68,10 +67,8 @@ let nextState = (point, cellState, grid) => {
 let nextGeneration = mapGrid(nextState)
 
 let toggleTile = (grid, point) => {
-  open Belt.Array
-
-  let grid' = grid->map(copy)
-  let (y, x) = point->safePoint(grid->length)
+  let grid' = grid->A.map(A.copy)
+  let (y, x) = point->safePoint(grid->A.length)
   let tile = grid'[y][x]
 
   grid'[y][x] = switch tile {
