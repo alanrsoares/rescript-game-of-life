@@ -1,13 +1,11 @@
 open CoreComponents
 
-module Wrapper = %styled.div(
-  `
+module Wrapper = %styled.div(`
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 2rem 0;
-  `
-)
+  `)
 
 @react.component
 let make = (~isPlaying, ~onReset, ~onRandom, ~onTick, ~onToggleAutoplay) =>
