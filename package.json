@@ -7,6 +7,7 @@
     "start": "concurrently 'yarn re:watch' 'yarn start:web'",
     "start:web": "PORT=5000 live-server public --host=localhost",
     "build": "yarn re:build && yarn bundle",
+    "pretest": "yarn build",
     "test": "jest",
     "re:build": "bsb -make-world -clean-world",
     "re:watch": "NINJA_ANSI_FORCED=1 bsb -make-world -w",
@@ -44,11 +45,7 @@
     "invariant": "^2.2.4",
     "levenary": "^1.1.1",
     "live-server": "^1.2.1",
-    "react-scripts": "^4.0.2",
     "rimraf": "^3.0.2"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": {
     "production": [
