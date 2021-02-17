@@ -20648,7 +20648,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     }
   });
 
-  // node_modules/bs-platform/lib/js/caml_array.js
+  // node_modules/@rescript/std/lib/js/caml_array.js
   var require_caml_array = __commonJS((exports) => {
     "use strict";
     function caml_array_sub(x, offset, len2) {
@@ -20763,7 +20763,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.set = set;
   });
 
-  // node_modules/bs-platform/lib/js/curry.js
+  // node_modules/@rescript/std/lib/js/curry.js
   var require_curry = __commonJS((exports) => {
     "use strict";
     var Caml_array = require_caml_array();
@@ -21272,7 +21272,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.__8 = __8;
   });
 
-  // node_modules/bs-platform/lib/js/js_int.js
+  // node_modules/@rescript/std/lib/js/js_int.js
   var require_js_int = __commonJS((exports) => {
     "use strict";
     function equal(x, y) {
@@ -21285,7 +21285,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.min = min;
   });
 
-  // node_modules/bs-platform/lib/js/js_math.js
+  // node_modules/@rescript/std/lib/js/js_math.js
   var require_js_math = __commonJS((exports) => {
     "use strict";
     var Js_int = require_js_int();
@@ -21327,7 +21327,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.random_int = random_int;
   });
 
-  // node_modules/bs-platform/lib/js/caml_option.js
+  // node_modules/@rescript/std/lib/js/caml_option.js
   var require_caml_option = __commonJS((exports) => {
     "use strict";
     function isNested(x) {
@@ -21404,7 +21404,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.option_unwrap = option_unwrap;
   });
 
-  // node_modules/bs-platform/lib/js/caml_primitive.js
+  // node_modules/@rescript/std/lib/js/caml_primitive.js
   var require_caml_primitive = __commonJS((exports) => {
     "use strict";
     function caml_int_compare(x, y) {
@@ -21539,7 +21539,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.caml_int32_max = caml_int32_max;
   });
 
-  // node_modules/bs-platform/lib/js/belt_Array.js
+  // node_modules/@rescript/std/lib/js/belt_Array.js
   var require_belt_Array = __commonJS((exports) => {
     "use strict";
     var Curry = require_curry();
@@ -22212,7 +22212,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.eq = eq;
   });
 
-  // node_modules/bs-platform/lib/js/belt_SortArray.js
+  // node_modules/@rescript/std/lib/js/belt_SortArray.js
   var require_belt_SortArray = __commonJS((exports) => {
     "use strict";
     var Curry = require_curry();
@@ -22625,7 +22625,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.diff = diff;
   });
 
-  // node_modules/bs-platform/lib/js/belt_List.js
+  // node_modules/@rescript/std/lib/js/belt_List.js
   var require_belt_List = __commonJS((exports) => {
     "use strict";
     var Curry = require_curry();
@@ -24073,7 +24073,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.sort = sort;
   });
 
-  // node_modules/bs-platform/lib/js/belt_Option.js
+  // node_modules/@rescript/std/lib/js/belt_Option.js
   var require_belt_Option = __commonJS((exports) => {
     "use strict";
     var Curry = require_curry();
@@ -27314,7 +27314,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.ClipPath = ClipPath;
   });
 
-  // node_modules/bs-platform/lib/js/js_dict.js
+  // node_modules/@rescript/std/lib/js/js_dict.js
   var require_js_dict = __commonJS((exports) => {
     "use strict";
     var Caml_option = require_caml_option();
@@ -28451,7 +28451,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.caches = caches;
   });
 
-  // node_modules/bs-platform/lib/js/js_null_undefined.js
+  // node_modules/@rescript/std/lib/js/js_null_undefined.js
   var require_js_null_undefined = __commonJS((exports) => {
     "use strict";
     var Caml_option = require_caml_option();
@@ -30244,7 +30244,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.page = page;
   });
 
-  // node_modules/bs-platform/lib/js/caml_hash_primitive.js
+  // node_modules/@rescript/std/lib/js/caml_hash_primitive.js
   var require_caml_hash_primitive = __commonJS((exports) => {
     "use strict";
     function rotl32(x, n) {
@@ -30288,7 +30288,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.caml_hash_final_mix = caml_hash_final_mix;
   });
 
-  // node_modules/bs-platform/lib/js/belt_internalBuckets.js
+  // node_modules/@rescript/std/lib/js/belt_internalBuckets.js
   var require_belt_internalBuckets = __commonJS((exports) => {
     "use strict";
     var Curry = require_curry();
@@ -30555,7 +30555,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.getBucketHistogram = getBucketHistogram;
   });
 
-  // node_modules/bs-platform/lib/js/belt_internalBucketsType.js
+  // node_modules/@rescript/std/lib/js/belt_internalBucketsType.js
   var require_belt_internalBucketsType = __commonJS((exports) => {
     "use strict";
     function power_2_above(_x, n) {
@@ -30599,7 +30599,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.isEmpty = isEmpty;
   });
 
-  // node_modules/bs-platform/lib/js/belt_HashMapString.js
+  // node_modules/@rescript/std/lib/js/belt_HashMapString.js
   var require_belt_HashMapString = __commonJS((exports) => {
     "use strict";
     var Caml_option = require_caml_option();
@@ -31056,7 +31056,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.make = make$1;
   });
 
-  // node_modules/bs-platform/lib/js/caml_obj.js
+  // node_modules/@rescript/std/lib/js/caml_obj.js
   var require_caml_obj = __commonJS((exports) => {
     "use strict";
     var Caml_primitive = require_caml_primitive();
@@ -31456,7 +31456,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.caml_max = caml_max;
   });
 
-  // node_modules/bs-platform/lib/js/caml_exceptions.js
+  // node_modules/@rescript/std/lib/js/caml_exceptions.js
   var require_caml_exceptions = __commonJS((exports) => {
     "use strict";
     var id = {
@@ -31482,7 +31482,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.caml_exn_slot_name = caml_exn_slot_name;
   });
 
-  // node_modules/bs-platform/lib/js/caml_js_exceptions.js
+  // node_modules/@rescript/std/lib/js/caml_js_exceptions.js
   var require_caml_js_exceptions = __commonJS((exports) => {
     "use strict";
     var Caml_option = require_caml_option();
@@ -31508,7 +31508,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.caml_as_js_exn = caml_as_js_exn;
   });
 
-  // node_modules/bs-platform/lib/js/array.js
+  // node_modules/@rescript/std/lib/js/array.js
   var require_array = __commonJS((exports) => {
     "use strict";
     var Curry = require_curry();
@@ -31998,7 +31998,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.Floatarray = Floatarray;
   });
 
-  // node_modules/bs-platform/lib/js/caml_int64.js
+  // node_modules/@rescript/std/lib/js/caml_int64.js
   var require_caml_int64 = __commonJS((exports) => {
     "use strict";
     function mk(lo, hi) {
@@ -32608,7 +32608,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.to_string = to_string;
   });
 
-  // node_modules/bs-platform/lib/js/caml_format.js
+  // node_modules/@rescript/std/lib/js/caml_format.js
   var require_caml_format = __commonJS((exports) => {
     "use strict";
     var Caml_int64 = require_caml_int64();
@@ -33389,7 +33389,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.caml_nativeint_of_string = caml_nativeint_of_string;
   });
 
-  // node_modules/bs-platform/lib/js/int32.js
+  // node_modules/@rescript/std/lib/js/int32.js
   var require_int32 = __commonJS((exports) => {
     "use strict";
     var Caml_format = require_caml_format();
@@ -33449,7 +33449,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.equal = equal;
   });
 
-  // node_modules/bs-platform/lib/js/int64.js
+  // node_modules/@rescript/std/lib/js/int64.js
   var require_int64 = __commonJS((exports) => {
     "use strict";
     var Caml_int64 = require_caml_int64();
@@ -33505,7 +33505,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.equal = equal;
   });
 
-  // node_modules/bs-platform/lib/js/caml_bytes.js
+  // node_modules/@rescript/std/lib/js/caml_bytes.js
   var require_caml_bytes = __commonJS((exports) => {
     "use strict";
     function set(s, i, ch) {
@@ -33718,7 +33718,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.caml_bytes_equal = caml_bytes_equal;
   });
 
-  // node_modules/bs-platform/lib/js/char.js
+  // node_modules/@rescript/std/lib/js/char.js
   var require_char = __commonJS((exports) => {
     "use strict";
     var Caml_bytes = require_caml_bytes();
@@ -33833,7 +33833,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.equal = equal;
   });
 
-  // node_modules/bs-platform/lib/js/bytes.js
+  // node_modules/@rescript/std/lib/js/bytes.js
   var require_bytes = __commonJS((exports) => {
     "use strict";
     var Char = require_char();
@@ -34407,7 +34407,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.unsafe_of_string = unsafe_of_string;
   });
 
-  // node_modules/bs-platform/lib/js/caml_string.js
+  // node_modules/@rescript/std/lib/js/caml_string.js
   var require_caml_string = __commonJS((exports) => {
     "use strict";
     function get(s, i) {
@@ -34427,7 +34427,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.make = make;
   });
 
-  // node_modules/bs-platform/lib/js/string.js
+  // node_modules/@rescript/std/lib/js/string.js
   var require_string = __commonJS((exports) => {
     "use strict";
     var Bytes = require_bytes();
@@ -34806,7 +34806,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.split_on_char = split_on_char;
   });
 
-  // node_modules/bs-platform/lib/js/caml_md5.js
+  // node_modules/@rescript/std/lib/js/caml_md5.js
   var require_caml_md5 = __commonJS((exports) => {
     "use strict";
     function cmn(q, a, b, x, s, t) {
@@ -34964,7 +34964,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.caml_md5_string = caml_md5_string;
   });
 
-  // node_modules/bs-platform/lib/js/caml_io.js
+  // node_modules/@rescript/std/lib/js/caml_io.js
   var require_caml_io = __commonJS((exports) => {
     "use strict";
     var stdout = {
@@ -35037,7 +35037,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.caml_ml_out_channels_list = caml_ml_out_channels_list;
   });
 
-  // node_modules/bs-platform/lib/js/caml_sys.js
+  // node_modules/@rescript/std/lib/js/caml_sys.js
   var require_caml_sys = __commonJS((exports) => {
     "use strict";
     function caml_sys_getenv(s) {
@@ -35129,7 +35129,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.caml_sys_file_exists = caml_sys_file_exists;
   });
 
-  // node_modules/bs-platform/lib/js/caml_external_polyfill.js
+  // node_modules/@rescript/std/lib/js/caml_external_polyfill.js
   var require_caml_external_polyfill = __commonJS((exports) => {
     "use strict";
     var getGlobalThis = function() {
@@ -35162,7 +35162,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.register = register;
   });
 
-  // node_modules/bs-platform/lib/js/pervasives.js
+  // node_modules/@rescript/std/lib/js/pervasives.js
   var require_pervasives = __commonJS((exports) => {
     "use strict";
     var Curry = require_curry();
@@ -35786,7 +35786,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.do_at_exit = do_at_exit;
   });
 
-  // node_modules/bs-platform/lib/js/digest.js
+  // node_modules/@rescript/std/lib/js/digest.js
   var require_digest = __commonJS((exports) => {
     "use strict";
     var Char = require_char();
@@ -35912,7 +35912,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.from_hex = from_hex;
   });
 
-  // node_modules/bs-platform/lib/js/random.js
+  // node_modules/@rescript/std/lib/js/random.js
   var require_random = __commonJS((exports) => {
     "use strict";
     var $$Array = require_array();
