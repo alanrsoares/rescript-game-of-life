@@ -5,18 +5,24 @@
   "homepage": "https://alanrsoares.github.io/rescript-game-of-life",
   "scripts": {
     "start": "concurrently 'yarn re:watch' 'yarn start:web'",
-    "start:web": "react-scripts start",
-    "build": "yarn re:build && react-scripts build",
+    "start:web": "PORT=5000 live-server public --host=localhost",
+    "build": "yarn re:build && yarn bundle",
     "test": "jest",
-    "eject": "react-scripts eject",
     "re:build": "bsb -make-world -clean-world",
-    "re:watch": "bsb -make-world -clean-world -w",
+    "re:watch": "NINJA_ANSI_FORCED=1 bsb -make-world -w",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d public",
+    "dev": "concurrently --names public,res,esb -c green.bold,red.bold,blue.bold --kill-others yarn:start:web yarn:re:watch yarn:bundle:watch",
+    "bundle": "esbuild src/Index.bs.js --outfile=public/dist/bundle.js --bundle --sourcemap --target=chrome58,firefox57,safari11,edge16 --define:process.env.NODE_ENV='\"development\"'",
+    "bundle:watch": "yarn bundle --watch --color=true",
+    "bundle:production": "yarn bundle --minify --define:process.env.NODE_ENV='\"production\"'",
+    "build:production": "yarn re:build && yarn bundle:production",
+    "clean": "bsb -clean-world && rimraf public/dist"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.2",
     "@rescript/react": "^0.10.1",
+    "@rescript/std": "^9.0.1",
     "polished": "^4.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -33,10 +39,13 @@
     "@types/react-dom": "^17.0.1",
     "bs-platform": "^9.0.1",
     "concurrently": "^5.3.0",
+    "esbuild": "^0.8.46",
     "gh-pages": "^3.1.0",
     "invariant": "^2.2.4",
     "levenary": "^1.1.1",
-    "react-scripts": "^4.0.2"
+    "live-server": "^1.2.1",
+    "react-scripts": "^4.0.2",
+    "rimraf": "^3.0.2"
   },
   "eslintConfig": {
     "extends": "react-app"
