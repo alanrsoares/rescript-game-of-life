@@ -1,6 +1,6 @@
 {
   "name": "reason-game-of-life",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "homepage": "https://alanrsoares.github.io/rescript-game-of-life",
   "scripts": {
