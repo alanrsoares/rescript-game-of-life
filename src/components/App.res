@@ -1,22 +1,23 @@
 open Model
-open Util
+
 open CoreComponents
+
+module R = React
 
 @react.component
 let make = () => {
-  let (state, dispatch) = React.useReducer(Reducers.root, initialState)
-
-  let handleToggleTile = React.useCallback0((y, x) => dispatch(Toggle((y, x))))
-  let handleReset = React.useCallback0(_ => dispatch(Reset))
-  let handleRandom = React.useCallback0(_ => dispatch(Random))
-  let handleTick = React.useCallback0(_ => dispatch(Tick))
-  let handleToggleAutoPlay = React.useCallback2(_ => {
+  let (state, dispatch) = R.useReducer(Reducers.root, initialState)
+  let handleToggleTile = R.useCallback0((y, x) => dispatch(Toggle((y, x))))
+  let handleReset = R.useCallback0(_ => dispatch(Reset))
+  let handleRandom = R.useCallback0(_ => dispatch(Random))
+  let handleTick = R.useCallback0(_ => dispatch(Tick))
+  let handleToggleAutoPlay = R.useCallback2(_ => {
     let rec play = () => {
-      state.animationFrameId := requestAnimationFrame(play)
+      state.animationFrameId := Util.requestAnimationFrame(play)
       dispatch(Tick)
     }
     if state.isPlaying {
-      cancelAnimationFrame(state.animationFrameId.contents)
+      Util.cancelAnimationFrame(state.animationFrameId.contents)
       dispatch(Stop)
     } else {
       play()
@@ -30,7 +31,7 @@ let make = () => {
 
   <Root>
     <Content>
-      <AppBar> {"Conway's Game of Life"->str} </AppBar>
+      <AppBar> {"Conway's Game of Life"->R.string} </AppBar>
       <Controls
         isPlaying=state.isPlaying
         onReset=handleReset
@@ -39,7 +40,7 @@ let make = () => {
         onToggleAutoplay=handleToggleAutoPlay
       />
       <Grid data=state.grid onToggle=handleToggleTile />
-      <div> {label->str} </div>
+      <div> {label->R.string} </div>
     </Content>
   </Root>
 }

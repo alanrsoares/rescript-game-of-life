@@ -1,17 +1,14 @@
-@bs.val
+@val
 external requestAnimationFrame: (unit => unit) => int = "requestAnimationFrame"
 
-@bs.val
+@val
 external cancelAnimationFrame: int => unit = "cancelAnimationFrame"
-
-let str = ReasonReact.string
-let arr = ReasonReact.array
 
 let avgFrameRate = (ticks, startedAt) =>
   Js.Math.ceil(ticks->float_of_int /. ((Js.Date.now() -. startedAt) /. float_of_int(1000)))
 
 module Colors = {
-  @bs.module("polished")
+  @module("polished")
   external opacify: (float, string) => string = "opacify"
 
   let sqrSize = Config.boardSize * Config.boardSize

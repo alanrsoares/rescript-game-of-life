@@ -15,8 +15,9 @@
     "deploy": "gh-pages -d build"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.1",
-    "polished": "^4.0.5",
+    "@fortawesome/fontawesome-free": "^5.15.2",
+    "@rescript/react": "^0.10.1",
+    "polished": "^4.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "reason-react": "^0.9.1"
@@ -25,17 +26,17 @@
     "@ahrefs/bs-emotion": "^2.0.0",
     "@davesnx/styled-ppx": "^0.20.0",
     "@glennsl/bs-jest": "^0.6.0",
-    "@testing-library/jest-dom": "^5.11.6",
-    "@testing-library/react": "^11.2.2",
-    "@testing-library/user-event": "^12.5.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "bs-platform": "^8.4.2",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "^12.7.1",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.1",
+    "bs-platform": "^9.0.0",
     "concurrently": "^5.3.0",
     "gh-pages": "^3.1.0",
     "invariant": "^2.2.4",
     "levenary": "^1.1.1",
-    "react-scripts": "^4.0.1"
+    "react-scripts": "^4.0.2"
   },
   "eslintConfig": {
     "extends": "react-app"

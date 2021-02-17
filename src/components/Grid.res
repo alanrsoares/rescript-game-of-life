@@ -1,4 +1,4 @@
-open Util
+module R = React
 
 module Wrapper = %stiled.div(`
     display: flex;
@@ -16,8 +16,8 @@ let make = (~data: Game.grid, ~onToggle) => {
   )
 
   let renderRow = React.useCallback0((y, row) =>
-    <div key={y->string_of_int}> {row->A.mapWithIndex(renderTile(y))->arr} </div>
+    <div key={y->string_of_int}> {row->A.mapWithIndex(renderTile(y))->R.array} </div>
   )
 
-  <Wrapper> {data->A.mapWithIndex(renderRow)->arr} </Wrapper>
+  <Wrapper> {data->A.mapWithIndex(renderRow)->R.array} </Wrapper>
 }
