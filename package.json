@@ -21,7 +21,6 @@
     "clean": "bsb -clean-world && rimraf public/dist"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.2",
     "@rescript/react": "^0.10.1",
     "@rescript/std": "^9.0.1",
     "polished": "^4.1.0",
