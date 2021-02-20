@@ -1,11 +1,11 @@
 module R = React
 
 module Wrapper = %stiled.div(`
-    display: flex;
-    border: .25rem solid #222;
-    border-radius: .75rem;
-    padding: .125rem;
-  `)
+  display: flex;
+  border: .25rem solid #222;
+  border-radius: .75rem;
+  padding: .125rem;
+`)
 
 module A = Belt.Array
 
