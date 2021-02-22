@@ -31025,6 +31025,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       var onToggle = Props.onToggle;
       var renderTile = React.useCallback(function(y) {
         return function(x, cellState) {
+          var key = "" + x + "-" + y;
           return React.createElement(Tile$ReasonGameOfLife.make, {
             isAlive: cellState === 1,
             onToggle: function(param) {
@@ -31032,7 +31033,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
             },
             y,
             x,
-            key: "" + x + "-" + y
+            key
           });
         };
       }, []);
@@ -31051,8 +31052,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     var A;
     var make$1 = Grid;
     exports.R = R;
-    exports.Wrapper = Wrapper;
     exports.A = A;
+    exports.Wrapper = Wrapper;
     exports.make = make$1;
   });
 
