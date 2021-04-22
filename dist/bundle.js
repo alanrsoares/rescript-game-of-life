@@ -1,16 +1,27 @@
 (() => {
+  var __create = Object.create;
   var __defProp = Object.defineProperty;
+  var __getProtoOf = Object.getPrototypeOf;
+  var __hasOwnProp = Object.prototype.hasOwnProperty;
+  var __getOwnPropNames = Object.getOwnPropertyNames;
+  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
   var __markAsModule = (target) => __defProp(target, "__esModule", {value: true});
-  var __commonJS = (callback, module) => () => {
-    if (!module) {
-      module = {exports: {}};
-      callback(module.exports, module);
-    }
-    return module.exports;
-  };
+  var __esm = (fn, res) => () => (fn && (res = fn(fn = 0)), res);
+  var __commonJS = (cb, mod) => () => (mod || cb((mod = {exports: {}}).exports, mod), mod.exports);
   var __export = (target, all) => {
     for (var name in all)
       __defProp(target, name, {get: all[name], enumerable: true});
+  };
+  var __reExport = (target, module, desc) => {
+    if (module && typeof module === "object" || typeof module === "function") {
+      for (let key of __getOwnPropNames(module))
+        if (!__hasOwnProp.call(target, key) && key !== "default")
+          __defProp(target, key, {get: () => module[key], enumerable: !(desc = __getOwnPropDesc(module, key)) || desc.enumerable});
+    }
+    return target;
+  };
+  var __toModule = (module) => {
+    return __reExport(__markAsModule(__defProp(module != null ? __create(__getProtoOf(module)) : {}, "default", module && module.__esModule && "default" in module ? {get: () => module.default, enumerable: true} : {value: module, enumerable: true})), module);
   };
 
   // node_modules/object-assign/index.js
@@ -88,7 +99,7 @@
 
   // node_modules/react/cjs/react.development.js
   var require_react_development = __commonJS((exports) => {
-    /** @license React v17.0.1
+    /** @license React v17.0.2
      * react.development.js
      *
      * Copyright (c) Facebook, Inc. and its affiliates.
@@ -101,7 +112,7 @@
       (function() {
         "use strict";
         var _assign = require_object_assign();
-        var ReactVersion = "17.0.1";
+        var ReactVersion = "17.0.2";
         var REACT_ELEMENT_TYPE = 60103;
         var REACT_PORTAL_TYPE = 60106;
         exports.Fragment = 60107;
@@ -1652,7 +1663,7 @@
 
   // node_modules/scheduler/cjs/scheduler.development.js
   var require_scheduler_development = __commonJS((exports) => {
-    /** @license React v0.20.1
+    /** @license React v0.20.2
      * scheduler.development.js
      *
      * Copyright (c) Facebook, Inc. and its affiliates.
@@ -1665,7 +1676,7 @@
       (function() {
         "use strict";
         var enableSchedulerDebugging = false;
-        var enableProfiling = true;
+        var enableProfiling = false;
         var requestHostCallback;
         var requestHostTimeout;
         var cancelHostTimeout;
@@ -1862,144 +1873,12 @@
           var diff = a.sortIndex - b.sortIndex;
           return diff !== 0 ? diff : a.id - b.id;
         }
-        var NoPriority = 0;
         var ImmediatePriority = 1;
         var UserBlockingPriority = 2;
         var NormalPriority = 3;
         var LowPriority = 4;
         var IdlePriority = 5;
-        var runIdCounter = 0;
-        var mainThreadIdCounter = 0;
-        var profilingStateSize = 4;
-        var sharedProfilingBuffer = typeof SharedArrayBuffer === "function" ? new SharedArrayBuffer(profilingStateSize * Int32Array.BYTES_PER_ELEMENT) : typeof ArrayBuffer === "function" ? new ArrayBuffer(profilingStateSize * Int32Array.BYTES_PER_ELEMENT) : null;
-        var profilingState = sharedProfilingBuffer !== null ? new Int32Array(sharedProfilingBuffer) : [];
-        var PRIORITY = 0;
-        var CURRENT_TASK_ID = 1;
-        var CURRENT_RUN_ID = 2;
-        var QUEUE_SIZE = 3;
-        {
-          profilingState[PRIORITY] = NoPriority;
-          profilingState[QUEUE_SIZE] = 0;
-          profilingState[CURRENT_TASK_ID] = 0;
-        }
-        var INITIAL_EVENT_LOG_SIZE = 131072;
-        var MAX_EVENT_LOG_SIZE = 524288;
-        var eventLogSize = 0;
-        var eventLogBuffer = null;
-        var eventLog = null;
-        var eventLogIndex = 0;
-        var TaskStartEvent = 1;
-        var TaskCompleteEvent = 2;
-        var TaskErrorEvent = 3;
-        var TaskCancelEvent = 4;
-        var TaskRunEvent = 5;
-        var TaskYieldEvent = 6;
-        var SchedulerSuspendEvent = 7;
-        var SchedulerResumeEvent = 8;
-        function logEvent(entries) {
-          if (eventLog !== null) {
-            var offset = eventLogIndex;
-            eventLogIndex += entries.length;
-            if (eventLogIndex + 1 > eventLogSize) {
-              eventLogSize *= 2;
-              if (eventLogSize > MAX_EVENT_LOG_SIZE) {
-                console["error"]("Scheduler Profiling: Event log exceeded maximum size. Don't forget to call `stopLoggingProfilingEvents()`.");
-                stopLoggingProfilingEvents();
-                return;
-              }
-              var newEventLog = new Int32Array(eventLogSize * 4);
-              newEventLog.set(eventLog);
-              eventLogBuffer = newEventLog.buffer;
-              eventLog = newEventLog;
-            }
-            eventLog.set(entries, offset);
-          }
-        }
-        function startLoggingProfilingEvents() {
-          eventLogSize = INITIAL_EVENT_LOG_SIZE;
-          eventLogBuffer = new ArrayBuffer(eventLogSize * 4);
-          eventLog = new Int32Array(eventLogBuffer);
-          eventLogIndex = 0;
-        }
-        function stopLoggingProfilingEvents() {
-          var buffer = eventLogBuffer;
-          eventLogSize = 0;
-          eventLogBuffer = null;
-          eventLog = null;
-          eventLogIndex = 0;
-          return buffer;
-        }
-        function markTaskStart(task, ms) {
-          {
-            profilingState[QUEUE_SIZE]++;
-            if (eventLog !== null) {
-              logEvent([TaskStartEvent, ms * 1e3, task.id, task.priorityLevel]);
-            }
-          }
-        }
-        function markTaskCompleted(task, ms) {
-          {
-            profilingState[PRIORITY] = NoPriority;
-            profilingState[CURRENT_TASK_ID] = 0;
-            profilingState[QUEUE_SIZE]--;
-            if (eventLog !== null) {
-              logEvent([TaskCompleteEvent, ms * 1e3, task.id]);
-            }
-          }
-        }
-        function markTaskCanceled(task, ms) {
-          {
-            profilingState[QUEUE_SIZE]--;
-            if (eventLog !== null) {
-              logEvent([TaskCancelEvent, ms * 1e3, task.id]);
-            }
-          }
-        }
         function markTaskErrored(task, ms) {
-          {
-            profilingState[PRIORITY] = NoPriority;
-            profilingState[CURRENT_TASK_ID] = 0;
-            profilingState[QUEUE_SIZE]--;
-            if (eventLog !== null) {
-              logEvent([TaskErrorEvent, ms * 1e3, task.id]);
-            }
-          }
-        }
-        function markTaskRun(task, ms) {
-          {
-            runIdCounter++;
-            profilingState[PRIORITY] = task.priorityLevel;
-            profilingState[CURRENT_TASK_ID] = task.id;
-            profilingState[CURRENT_RUN_ID] = runIdCounter;
-            if (eventLog !== null) {
-              logEvent([TaskRunEvent, ms * 1e3, task.id, runIdCounter]);
-            }
-          }
-        }
-        function markTaskYield(task, ms) {
-          {
-            profilingState[PRIORITY] = NoPriority;
-            profilingState[CURRENT_TASK_ID] = 0;
-            profilingState[CURRENT_RUN_ID] = 0;
-            if (eventLog !== null) {
-              logEvent([TaskYieldEvent, ms * 1e3, task.id, runIdCounter]);
-            }
-          }
-        }
-        function markSchedulerSuspended(ms) {
-          {
-            mainThreadIdCounter++;
-            if (eventLog !== null) {
-              logEvent([SchedulerSuspendEvent, ms * 1e3, mainThreadIdCounter]);
-            }
-          }
-        }
-        function markSchedulerUnsuspended(ms) {
-          {
-            if (eventLog !== null) {
-              logEvent([SchedulerResumeEvent, ms * 1e3, mainThreadIdCounter]);
-            }
-          }
         }
         var maxSigned31BitInt = 1073741823;
         var IMMEDIATE_PRIORITY_TIMEOUT = -1;
@@ -2024,10 +1903,6 @@
               pop(timerQueue);
               timer.sortIndex = timer.expirationTime;
               push(taskQueue, timer);
-              {
-                markTaskStart(timer, currentTime);
-                timer.isQueued = true;
-              }
             } else {
               return;
             }
@@ -2050,9 +1925,6 @@
           }
         }
         function flushWork(hasTimeRemaining, initialTime2) {
-          {
-            markSchedulerUnsuspended(initialTime2);
-          }
           isHostCallbackScheduled = false;
           if (isHostTimeoutScheduled) {
             isHostTimeoutScheduled = false;
@@ -2079,10 +1951,6 @@
             currentTask = null;
             currentPriorityLevel = previousPriorityLevel;
             isPerformingWork = false;
-            {
-              var _currentTime = exports.unstable_now();
-              markSchedulerSuspended(_currentTime);
-            }
           }
         }
         function workLoop(hasTimeRemaining, initialTime2) {
@@ -2098,17 +1966,11 @@
               currentTask.callback = null;
               currentPriorityLevel = currentTask.priorityLevel;
               var didUserCallbackTimeout = currentTask.expirationTime <= currentTime;
-              markTaskRun(currentTask, currentTime);
               var continuationCallback = callback(didUserCallbackTimeout);
               currentTime = exports.unstable_now();
               if (typeof continuationCallback === "function") {
                 currentTask.callback = continuationCallback;
-                markTaskYield(currentTask, currentTime);
               } else {
-                {
-                  markTaskCompleted(currentTask, currentTime);
-                  currentTask.isQueued = false;
-                }
                 if (currentTask === peek(taskQueue)) {
                   pop(taskQueue);
                 }
@@ -2221,9 +2083,6 @@
             expirationTime,
             sortIndex: -1
           };
-          {
-            newTask.isQueued = false;
-          }
           if (startTime > currentTime) {
             newTask.sortIndex = startTime;
             push(timerQueue, newTask);
@@ -2238,10 +2097,6 @@
           } else {
             newTask.sortIndex = expirationTime;
             push(taskQueue, newTask);
-            {
-              markTaskStart(newTask, currentTime);
-              newTask.isQueued = true;
-            }
             if (!isHostCallbackScheduled && !isPerformingWork) {
               isHostCallbackScheduled = true;
               requestHostCallback(flushWork);
@@ -2261,24 +2116,13 @@
           return peek(taskQueue);
         }
         function unstable_cancelCallback(task) {
-          {
-            if (task.isQueued) {
-              var currentTime = exports.unstable_now();
-              markTaskCanceled(task, currentTime);
-              task.isQueued = false;
-            }
-          }
           task.callback = null;
         }
         function unstable_getCurrentPriorityLevel() {
           return currentPriorityLevel;
         }
         var unstable_requestPaint = requestPaint;
-        var unstable_Profiling = {
-          startLoggingProfilingEvents,
-          stopLoggingProfilingEvents,
-          sharedProfilingBuffer
-        };
+        var unstable_Profiling = null;
         exports.unstable_IdlePriority = IdlePriority;
         exports.unstable_ImmediatePriority = ImmediatePriority;
         exports.unstable_LowPriority = LowPriority;
@@ -2311,7 +2155,7 @@
 
   // node_modules/scheduler/cjs/scheduler-tracing.development.js
   var require_scheduler_tracing_development = __commonJS((exports) => {
-    /** @license React v0.20.1
+    /** @license React v0.20.2
      * scheduler-tracing.development.js
      *
      * Copyright (c) Facebook, Inc. and its affiliates.
@@ -2609,7 +2453,7 @@
 
   // node_modules/react-dom/cjs/react-dom.development.js
   var require_react_dom_development = __commonJS((exports) => {
-    /** @license React v17.0.1
+    /** @license React v17.0.2
      * react-dom.development.js
      *
      * Copyright (c) Facebook, Inc. and its affiliates.
@@ -10361,7 +10205,7 @@
             }
           }
         }
-        var ReactVersion = "17.0.1";
+        var ReactVersion = "17.0.2";
         var NoMode = 0;
         var StrictMode = 1;
         var BlockingMode = 2;
@@ -20611,47 +20455,48 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
   });
 
   // src/serviceWorker.js
-  var require_serviceWorker = __commonJS((exports) => {
-    __markAsModule(exports);
-    __export(exports, {
-      register: () => register,
-      unregister: () => unregister
-    });
-    var isLocalhost = Boolean(window.location.hostname === "localhost" || window.location.hostname === "[::1]" || window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/));
-    function register(config) {
-      if (false) {
-        const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
-        if (publicUrl.origin !== window.location.origin) {
-          return;
+  var serviceWorker_exports = {};
+  __export(serviceWorker_exports, {
+    register: () => register,
+    unregister: () => unregister
+  });
+  function register(config) {
+    if (false) {
+      const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
+      if (publicUrl.origin !== window.location.origin) {
+        return;
+      }
+      window.addEventListener("load", () => {
+        const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
+        if (isLocalhost) {
+          checkValidServiceWorker(swUrl, config);
+          navigator.serviceWorker.ready.then(() => {
+            console.log("This web app is being served cache-first by a service worker. To learn more, visit https://bit.ly/CRA-PWA");
+          });
+        } else {
+          registerValidSW(swUrl, config);
         }
-        window.addEventListener("load", () => {
-          const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
-          if (isLocalhost) {
-            checkValidServiceWorker(swUrl, config);
-            navigator.serviceWorker.ready.then(() => {
-              console.log("This web app is being served cache-first by a service worker. To learn more, visit https://bit.ly/CRA-PWA");
-            });
-          } else {
-            registerValidSW(swUrl, config);
-          }
-        });
-      }
+      });
     }
-    function unregister() {
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.ready.then((registration) => {
-          registration.unregister();
-        }).catch((error) => {
-          console.error(error.message);
-        });
-      }
+  }
+  function unregister() {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.ready.then((registration) => {
+        registration.unregister();
+      }).catch((error) => {
+        console.error(error.message);
+      });
     }
+  }
+  var isLocalhost;
+  var init_serviceWorker = __esm(() => {
+    isLocalhost = Boolean(window.location.hostname === "localhost" || window.location.hostname === "[::1]" || window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/));
   });
 
   // node_modules/@rescript/std/lib/js/caml_array.js
   var require_caml_array = __commonJS((exports) => {
     "use strict";
-    function caml_array_sub(x, offset, len2) {
+    function sub(x, offset, len2) {
       var result = new Array(len2);
       var j = 0;
       var i = offset;
@@ -20699,7 +20544,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       }
       ;
     }
-    function caml_array_concat(l) {
+    function concat(l) {
       var v = len(0, l);
       var result = new Array(v);
       fill(result, 0, l);
@@ -20725,21 +20570,21 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       }
       return xs[index];
     }
-    function caml_make_vect(len2, init) {
+    function make(len2, init) {
       var b = new Array(len2);
       for (var i = 0; i < len2; ++i) {
         b[i] = init;
       }
       return b;
     }
-    function caml_make_float_vect(len2) {
+    function make_float(len2) {
       var b = new Array(len2);
       for (var i = 0; i < len2; ++i) {
         b[i] = 0;
       }
       return b;
     }
-    function caml_array_blit(a1, i1, a2, i2, len2) {
+    function blit(a1, i1, a2, i2, len2) {
       if (i2 <= i1) {
         for (var j = 0; j < len2; ++j) {
           a2[j + i2 | 0] = a1[j + i1 | 0];
@@ -20750,15 +20595,15 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         a2[j$1 + i2 | 0] = a1[j$1 + i1 | 0];
       }
     }
-    function caml_array_dup(prim) {
+    function dup(prim) {
       return prim.slice(0);
     }
-    exports.caml_array_dup = caml_array_dup;
-    exports.caml_array_sub = caml_array_sub;
-    exports.caml_array_concat = caml_array_concat;
-    exports.caml_make_vect = caml_make_vect;
-    exports.caml_make_float_vect = caml_make_float_vect;
-    exports.caml_array_blit = caml_array_blit;
+    exports.dup = dup;
+    exports.sub = sub;
+    exports.concat = concat;
+    exports.make = make;
+    exports.make_float = make_float;
+    exports.blit = blit;
     exports.get = get;
     exports.set = set;
   });
@@ -20785,8 +20630,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
             };
           }(f, args);
         }
-        _args = Caml_array.caml_array_sub(args, arity, -d | 0);
-        _f = f.apply(null, Caml_array.caml_array_sub(args, 0, arity));
+        _args = Caml_array.sub(args, arity, -d | 0);
+        _f = f.apply(null, Caml_array.sub(args, 0, arity));
         continue;
       }
       ;
@@ -21272,6 +21117,197 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.__8 = __8;
   });
 
+  // node_modules/@rescript/std/lib/js/caml.js
+  var require_caml = __commonJS((exports) => {
+    "use strict";
+    function caml_int_compare(x, y) {
+      if (x < y) {
+        return -1;
+      } else if (x === y) {
+        return 0;
+      } else {
+        return 1;
+      }
+    }
+    function caml_bool_compare(x, y) {
+      if (x) {
+        if (y) {
+          return 0;
+        } else {
+          return 1;
+        }
+      } else if (y) {
+        return -1;
+      } else {
+        return 0;
+      }
+    }
+    function caml_float_compare(x, y) {
+      if (x === y) {
+        return 0;
+      } else if (x < y) {
+        return -1;
+      } else if (x > y || x === x) {
+        return 1;
+      } else if (y === y) {
+        return -1;
+      } else {
+        return 0;
+      }
+    }
+    function caml_string_compare(s1, s2) {
+      if (s1 === s2) {
+        return 0;
+      } else if (s1 < s2) {
+        return -1;
+      } else {
+        return 1;
+      }
+    }
+    function caml_bool_min(x, y) {
+      if (x) {
+        return y;
+      } else {
+        return x;
+      }
+    }
+    function caml_int_min(x, y) {
+      if (x < y) {
+        return x;
+      } else {
+        return y;
+      }
+    }
+    function caml_float_min(x, y) {
+      if (x < y) {
+        return x;
+      } else {
+        return y;
+      }
+    }
+    function caml_string_min(x, y) {
+      if (x < y) {
+        return x;
+      } else {
+        return y;
+      }
+    }
+    function caml_int32_min(x, y) {
+      if (x < y) {
+        return x;
+      } else {
+        return y;
+      }
+    }
+    function caml_bool_max(x, y) {
+      if (x) {
+        return x;
+      } else {
+        return y;
+      }
+    }
+    function caml_int_max(x, y) {
+      if (x > y) {
+        return x;
+      } else {
+        return y;
+      }
+    }
+    function caml_float_max(x, y) {
+      if (x > y) {
+        return x;
+      } else {
+        return y;
+      }
+    }
+    function caml_string_max(x, y) {
+      if (x > y) {
+        return x;
+      } else {
+        return y;
+      }
+    }
+    function caml_int32_max(x, y) {
+      if (x > y) {
+        return x;
+      } else {
+        return y;
+      }
+    }
+    function i64_eq(x, y) {
+      if (x[1] === y[1]) {
+        return x[0] === y[0];
+      } else {
+        return false;
+      }
+    }
+    function i64_ge(param, param$1) {
+      var other_hi = param$1[0];
+      var hi = param[0];
+      if (hi > other_hi) {
+        return true;
+      } else if (hi < other_hi) {
+        return false;
+      } else {
+        return param[1] >= param$1[1];
+      }
+    }
+    function i64_neq(x, y) {
+      return !i64_eq(x, y);
+    }
+    function i64_lt(x, y) {
+      return !i64_ge(x, y);
+    }
+    function i64_gt(x, y) {
+      if (x[0] > y[0]) {
+        return true;
+      } else if (x[0] < y[0]) {
+        return false;
+      } else {
+        return x[1] > y[1];
+      }
+    }
+    function i64_le(x, y) {
+      return !i64_gt(x, y);
+    }
+    function i64_min(x, y) {
+      if (i64_ge(x, y)) {
+        return y;
+      } else {
+        return x;
+      }
+    }
+    function i64_max(x, y) {
+      if (i64_gt(x, y)) {
+        return x;
+      } else {
+        return y;
+      }
+    }
+    exports.caml_int_compare = caml_int_compare;
+    exports.caml_bool_compare = caml_bool_compare;
+    exports.caml_float_compare = caml_float_compare;
+    exports.caml_string_compare = caml_string_compare;
+    exports.caml_bool_min = caml_bool_min;
+    exports.caml_int_min = caml_int_min;
+    exports.caml_float_min = caml_float_min;
+    exports.caml_string_min = caml_string_min;
+    exports.caml_int32_min = caml_int32_min;
+    exports.caml_bool_max = caml_bool_max;
+    exports.caml_int_max = caml_int_max;
+    exports.caml_float_max = caml_float_max;
+    exports.caml_string_max = caml_string_max;
+    exports.caml_int32_max = caml_int32_max;
+    exports.i64_eq = i64_eq;
+    exports.i64_neq = i64_neq;
+    exports.i64_lt = i64_lt;
+    exports.i64_gt = i64_gt;
+    exports.i64_le = i64_le;
+    exports.i64_ge = i64_ge;
+    exports.i64_min = i64_min;
+    exports.i64_max = i64_max;
+  });
+
   // node_modules/@rescript/std/lib/js/js_int.js
   var require_js_int = __commonJS((exports) => {
     "use strict";
@@ -21404,148 +21440,13 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.option_unwrap = option_unwrap;
   });
 
-  // node_modules/@rescript/std/lib/js/caml_primitive.js
-  var require_caml_primitive = __commonJS((exports) => {
-    "use strict";
-    function caml_int_compare(x, y) {
-      if (x < y) {
-        return -1;
-      } else if (x === y) {
-        return 0;
-      } else {
-        return 1;
-      }
-    }
-    function caml_bool_compare(x, y) {
-      if (x) {
-        if (y) {
-          return 0;
-        } else {
-          return 1;
-        }
-      } else if (y) {
-        return -1;
-      } else {
-        return 0;
-      }
-    }
-    function caml_float_compare(x, y) {
-      if (x === y) {
-        return 0;
-      } else if (x < y) {
-        return -1;
-      } else if (x > y || x === x) {
-        return 1;
-      } else if (y === y) {
-        return -1;
-      } else {
-        return 0;
-      }
-    }
-    function caml_string_compare(s1, s2) {
-      if (s1 === s2) {
-        return 0;
-      } else if (s1 < s2) {
-        return -1;
-      } else {
-        return 1;
-      }
-    }
-    function caml_bool_min(x, y) {
-      if (x) {
-        return y;
-      } else {
-        return x;
-      }
-    }
-    function caml_int_min(x, y) {
-      if (x < y) {
-        return x;
-      } else {
-        return y;
-      }
-    }
-    function caml_float_min(x, y) {
-      if (x < y) {
-        return x;
-      } else {
-        return y;
-      }
-    }
-    function caml_string_min(x, y) {
-      if (x < y) {
-        return x;
-      } else {
-        return y;
-      }
-    }
-    function caml_int32_min(x, y) {
-      if (x < y) {
-        return x;
-      } else {
-        return y;
-      }
-    }
-    function caml_bool_max(x, y) {
-      if (x) {
-        return x;
-      } else {
-        return y;
-      }
-    }
-    function caml_int_max(x, y) {
-      if (x > y) {
-        return x;
-      } else {
-        return y;
-      }
-    }
-    function caml_float_max(x, y) {
-      if (x > y) {
-        return x;
-      } else {
-        return y;
-      }
-    }
-    function caml_string_max(x, y) {
-      if (x > y) {
-        return x;
-      } else {
-        return y;
-      }
-    }
-    function caml_int32_max(x, y) {
-      if (x > y) {
-        return x;
-      } else {
-        return y;
-      }
-    }
-    var caml_int32_compare = caml_int_compare;
-    exports.caml_int_compare = caml_int_compare;
-    exports.caml_bool_compare = caml_bool_compare;
-    exports.caml_float_compare = caml_float_compare;
-    exports.caml_string_compare = caml_string_compare;
-    exports.caml_int32_compare = caml_int32_compare;
-    exports.caml_bool_min = caml_bool_min;
-    exports.caml_int_min = caml_int_min;
-    exports.caml_float_min = caml_float_min;
-    exports.caml_string_min = caml_string_min;
-    exports.caml_int32_min = caml_int32_min;
-    exports.caml_bool_max = caml_bool_max;
-    exports.caml_int_max = caml_int_max;
-    exports.caml_float_max = caml_float_max;
-    exports.caml_string_max = caml_string_max;
-    exports.caml_int32_max = caml_int32_max;
-  });
-
   // node_modules/@rescript/std/lib/js/belt_Array.js
   var require_belt_Array = __commonJS((exports) => {
     "use strict";
+    var Caml = require_caml();
     var Curry = require_curry();
     var Js_math = require_js_math();
     var Caml_option = require_caml_option();
-    var Caml_primitive = require_caml_primitive();
     function get(arr, i) {
       if (i >= 0 && i < arr.length) {
         return Caml_option.some(arr[i]);
@@ -21734,7 +21635,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         return [];
       }
       var lena = a.length;
-      var ofs = offset < 0 ? Caml_primitive.caml_int_max(lena + offset | 0, 0) : offset;
+      var ofs = offset < 0 ? Caml.caml_int_max(lena + offset | 0, 0) : offset;
       var hasLen = lena - ofs | 0;
       var copyLength = hasLen < len ? hasLen : len;
       if (copyLength <= 0) {
@@ -21748,7 +21649,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     }
     function sliceToEnd(a, offset) {
       var lena = a.length;
-      var ofs = offset < 0 ? Caml_primitive.caml_int_max(lena + offset | 0, 0) : offset;
+      var ofs = offset < 0 ? Caml.caml_int_max(lena + offset | 0, 0) : offset;
       var len = lena - ofs | 0;
       var result = new Array(len);
       for (var i = 0; i < len; ++i) {
@@ -21761,7 +21662,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         return;
       }
       var lena = a.length;
-      var ofs = offset < 0 ? Caml_primitive.caml_int_max(lena + offset | 0, 0) : offset;
+      var ofs = offset < 0 ? Caml.caml_int_max(lena + offset | 0, 0) : offset;
       var hasLen = lena - ofs | 0;
       var fillLength = hasLen < len ? hasLen : len;
       if (fillLength <= 0) {
@@ -21785,9 +21686,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     function blit(a1, ofs1, a2, ofs2, len) {
       var lena1 = a1.length;
       var lena2 = a2.length;
-      var srcofs1 = ofs1 < 0 ? Caml_primitive.caml_int_max(lena1 + ofs1 | 0, 0) : ofs1;
-      var srcofs2 = ofs2 < 0 ? Caml_primitive.caml_int_max(lena2 + ofs2 | 0, 0) : ofs2;
-      var blitLength = Caml_primitive.caml_int_min(len, Caml_primitive.caml_int_min(lena1 - srcofs1 | 0, lena2 - srcofs2 | 0));
+      var srcofs1 = ofs1 < 0 ? Caml.caml_int_max(lena1 + ofs1 | 0, 0) : ofs1;
+      var srcofs2 = ofs2 < 0 ? Caml.caml_int_max(lena2 + ofs2 | 0, 0) : ofs2;
+      var blitLength = Caml.caml_int_min(len, Caml.caml_int_min(lena1 - srcofs1 | 0, lena2 - srcofs2 | 0));
       if (srcofs2 <= srcofs1) {
         for (var j = 0; j < blitLength; ++j) {
           a2[j + srcofs2 | 0] = a1[j + srcofs1 | 0];
@@ -21944,7 +21845,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     }
     function reduceReverse2U(a, b, x, f) {
       var r = x;
-      var len = Caml_primitive.caml_int_min(a.length, b.length);
+      var len = Caml.caml_int_min(a.length, b.length);
       for (var i = len - 1 | 0; i >= 0; --i) {
         r = f(r, a[i], b[i]);
       }
@@ -22016,14 +21917,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       ;
     }
     function every2U(a, b, p) {
-      return everyAux2(a, b, 0, p, Caml_primitive.caml_int_min(a.length, b.length));
+      return everyAux2(a, b, 0, p, Caml.caml_int_min(a.length, b.length));
     }
     function every2(a, b, p) {
       return every2U(a, b, Curry.__2(p));
     }
     function some2U(a, b, p) {
       var _i = 0;
-      var len = Caml_primitive.caml_int_min(a.length, b.length);
+      var len = Caml.caml_int_min(a.length, b.length);
       while (true) {
         var i = _i;
         if (i === len) {
@@ -24078,6 +23979,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     "use strict";
     var Curry = require_curry();
     var Caml_option = require_caml_option();
+    function keepU(opt, p) {
+      if (opt !== void 0 && p(Caml_option.valFromOption(opt))) {
+        return opt;
+      }
+    }
+    function keep(opt, p) {
+      return keepU(opt, Curry.__1(p));
+    }
     function forEachU(opt, f) {
       if (opt !== void 0) {
         return f(Caml_option.valFromOption(opt));
@@ -24164,6 +24073,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     function cmp(a, b, f) {
       return cmpU(a, b, Curry.__2(f));
     }
+    exports.keepU = keepU;
+    exports.keep = keep;
     exports.forEachU = forEachU;
     exports.forEach = forEach;
     exports.getExn = getExn;
@@ -31025,6 +30936,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       var onToggle = Props.onToggle;
       var renderTile = React.useCallback(function(y) {
         return function(x, cellState) {
+          var key = "" + x + "-" + y;
           return React.createElement(Tile$ReasonGameOfLife.make, {
             isAlive: cellState === 1,
             onToggle: function(param) {
@@ -31032,7 +30944,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
             },
             y,
             x,
-            key: "" + x + "-" + y
+            key
           });
         };
       }, []);
@@ -31051,15 +30963,15 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     var A;
     var make$1 = Grid;
     exports.R = R;
-    exports.Wrapper = Wrapper;
     exports.A = A;
+    exports.Wrapper = Wrapper;
     exports.make = make$1;
   });
 
   // node_modules/@rescript/std/lib/js/caml_obj.js
   var require_caml_obj = __commonJS((exports) => {
     "use strict";
-    var Caml_primitive = require_caml_primitive();
+    var Caml = require_caml();
     var for_in = function(o, foo) {
       for (var x in o) {
         foo(x);
@@ -31103,7 +31015,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       switch (a_type) {
         case "boolean":
           if (b_type === "boolean") {
-            return Caml_primitive.caml_bool_compare(a, b);
+            return Caml.caml_bool_compare(a, b);
           }
           break;
         case "function":
@@ -31117,12 +31029,12 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           break;
         case "number":
           if (b_type === "number") {
-            return Caml_primitive.caml_int_compare(a, b);
+            return Caml.caml_int_compare(a, b);
           }
           break;
         case "string":
           if (b_type === "string") {
-            return Caml_primitive.caml_string_compare(a, b);
+            return Caml.caml_string_compare(a, b);
           } else {
             return 1;
           }
@@ -31186,7 +31098,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           var tag_a = a.TAG | 0;
           var tag_b = b.TAG | 0;
           if (tag_a === 248) {
-            return Caml_primitive.caml_int_compare(a[1], b[1]);
+            return Caml.caml_int_compare(a[1], b[1]);
           }
           if (tag_a === 251) {
             throw {
@@ -31301,7 +31213,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       var match$1 = min_key_rhs.contents;
       if (match !== void 0) {
         if (match$1 !== void 0) {
-          return Caml_primitive.caml_string_compare(match, match$1);
+          return Caml.caml_string_compare(match, match$1);
         } else {
           return -1;
         }
@@ -31516,7 +31428,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     var Caml_array = require_caml_array();
     var Caml_exceptions = require_caml_exceptions();
     var Caml_js_exceptions = require_caml_js_exceptions();
-    var make_float = Caml_array.caml_make_float_vect;
+    var make_float = Caml_array.make_float;
     var Floatarray = {};
     function init(l, f) {
       if (l === 0) {
@@ -31529,16 +31441,16 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           Error: new Error()
         };
       }
-      var res = Caml_array.caml_make_vect(l, Curry._1(f, 0));
+      var res = Caml_array.make(l, Curry._1(f, 0));
       for (var i = 1; i < l; ++i) {
         res[i] = Curry._1(f, i);
       }
       return res;
     }
     function make_matrix(sx, sy, init2) {
-      var res = Caml_array.caml_make_vect(sx, []);
+      var res = Caml_array.make(sx, []);
       for (var x = 0; x < sx; ++x) {
-        res[x] = Caml_array.caml_make_vect(sy, init2);
+        res[x] = Caml_array.make(sy, init2);
       }
       return res;
     }
@@ -31547,7 +31459,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       if (l === 0) {
         return [];
       } else {
-        return Caml_array.caml_array_sub(a, 0, l);
+        return Caml_array.sub(a, 0, l);
       }
     }
     function append(a1, a2) {
@@ -31555,7 +31467,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       if (l1 === 0) {
         return copy(a2);
       } else if (a2.length === 0) {
-        return Caml_array.caml_array_sub(a1, 0, l1);
+        return Caml_array.sub(a1, 0, l1);
       } else {
         return a1.concat(a2);
       }
@@ -31568,7 +31480,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           Error: new Error()
         };
       }
-      return Caml_array.caml_array_sub(a, ofs, len);
+      return Caml_array.sub(a, ofs, len);
     }
     function fill(a, ofs, len, v) {
       if (ofs < 0 || len < 0 || ofs > (a.length - len | 0)) {
@@ -31590,7 +31502,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           Error: new Error()
         };
       }
-      return Caml_array.caml_array_blit(a1, ofs1, a2, ofs2, len);
+      return Caml_array.blit(a1, ofs1, a2, ofs2, len);
     }
     function iter(f, a) {
       for (var i = 0, i_finish = a.length; i < i_finish; ++i) {
@@ -31614,7 +31526,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       if (l === 0) {
         return [];
       }
-      var r = Caml_array.caml_make_vect(l, Curry._1(f, a[0]));
+      var r = Caml_array.make(l, Curry._1(f, a[0]));
       for (var i = 1; i < l; ++i) {
         r[i] = Curry._1(f, a[i]);
       }
@@ -31633,7 +31545,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       if (la === 0) {
         return [];
       }
-      var r = Caml_array.caml_make_vect(la, Curry._2(f, a[0], b[0]));
+      var r = Caml_array.make(la, Curry._2(f, a[0], b[0]));
       for (var i = 1; i < la; ++i) {
         r[i] = Curry._2(f, a[i], b[i]);
       }
@@ -31649,7 +31561,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       if (l === 0) {
         return [];
       }
-      var r = Caml_array.caml_make_vect(l, Curry._2(f, 0, a[0]));
+      var r = Caml_array.make(l, Curry._2(f, 0, a[0]));
       for (var i = 1; i < l; ++i) {
         r[i] = Curry._2(f, i, a[i]);
       }
@@ -31690,7 +31602,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       if (!l) {
         return [];
       }
-      var a = Caml_array.caml_make_vect(list_length(0, l), l.hd);
+      var a = Caml_array.make(list_length(0, l), l.hd);
       var _i = 1;
       var _param = l.tl;
       while (true) {
@@ -31960,13 +31872,13 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       }
       var l1 = l / 2 | 0;
       var l2 = l - l1 | 0;
-      var t = Caml_array.caml_make_vect(l2, Caml_array.get(a, 0));
+      var t = Caml_array.make(l2, Caml_array.get(a, 0));
       sortto(l1, t, 0, l2);
       sortto(0, a, l2, l1);
       return merge(l2, l1, t, 0, l2, a, 0);
     }
     var create_matrix = make_matrix;
-    var concat = Caml_array.caml_array_concat;
+    var concat = Caml_array.concat;
     var fast_sort = stable_sort;
     exports.make_float = make_float;
     exports.init = init;
@@ -32001,6 +31913,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
   // node_modules/@rescript/std/lib/js/caml_int64.js
   var require_caml_int64 = __commonJS((exports) => {
     "use strict";
+    var Caml = require_caml();
     function mk(lo, hi) {
       return [
         hi,
@@ -32061,23 +31974,16 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     function add(self2, param) {
       return add_aux(self2, param[1], param[0]);
     }
-    function eq(x, y) {
-      if (x[0] === y[0]) {
-        return x[1] === y[1];
-      } else {
-        return false;
-      }
-    }
     function equal_null(x, y) {
       if (y !== null) {
-        return eq(x, y);
+        return Caml.i64_eq(x, y);
       } else {
         return false;
       }
     }
     function equal_undefined(x, y) {
       if (y !== void 0) {
-        return eq(x, y);
+        return Caml.i64_eq(x, y);
       } else {
         return false;
       }
@@ -32086,7 +31992,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       if (y == null) {
         return false;
       } else {
-        return eq(x, y);
+        return Caml.i64_eq(x, y);
       }
     }
     function sub_aux(x, lo, hi) {
@@ -32272,49 +32178,6 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         (param[1] & param$1[1]) >>> 0
       ];
     }
-    function ge(param, param$1) {
-      var other_hi = param$1[0];
-      var hi = param[0];
-      if (hi > other_hi) {
-        return true;
-      } else if (hi < other_hi) {
-        return false;
-      } else {
-        return param[1] >= param$1[1];
-      }
-    }
-    function neq(x, y) {
-      return !eq(x, y);
-    }
-    function lt(x, y) {
-      return !ge(x, y);
-    }
-    function gt(x, y) {
-      if (x[0] > y[0]) {
-        return true;
-      } else if (x[0] < y[0]) {
-        return false;
-      } else {
-        return x[1] > y[1];
-      }
-    }
-    function le(x, y) {
-      return !gt(x, y);
-    }
-    function min(x, y) {
-      if (ge(x, y)) {
-        return y;
-      } else {
-        return x;
-      }
-    }
-    function max(x, y) {
-      if (gt(x, y)) {
-        return x;
-      } else {
-        return y;
-      }
-    }
     function to_float(param) {
       return param[0] * 4294967296 + param[1];
     }
@@ -32354,7 +32217,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         return String(to_float(self2));
       }
       if (self2[0] < 0) {
-        if (eq(self2, min_int)) {
+        if (Caml.i64_eq(self2, min_int)) {
           return "-9223372036854775808";
         } else {
           return "-" + to_string(neg(self2));
@@ -32407,10 +32270,10 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           } else if (self2[1] !== 0) {
             exit = 1;
           } else {
-            if (eq(other, one) || eq(other, neg_one)) {
+            if (Caml.i64_eq(other, one) || Caml.i64_eq(other, neg_one)) {
               return self2;
             }
-            if (eq(other, min_int)) {
+            if (Caml.i64_eq(other, min_int)) {
               return one;
             }
             var half_this = asr_(self2, 1);
@@ -32459,14 +32322,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
             }
             var res = zero;
             var rem$1 = self2;
-            while (ge(rem$1, other)) {
+            while (Caml.i64_ge(rem$1, other)) {
               var b = Math.floor(to_float(rem$1) / to_float(other));
               var approx$1 = 1 > b ? 1 : b;
               var log2 = Math.ceil(Math.log(approx$1) / Math.LN2);
               var delta = log2 <= 48 ? 1 : Math.pow(2, log2 - 48);
               var approxRes = of_float(approx$1);
               var approxRem = mul(approxRes, other);
-              while (approxRem[0] < 0 || gt(approxRem, rem$1)) {
+              while (approxRem[0] < 0 || Caml.i64_gt(approxRem, rem$1)) {
                 approx$1 = approx$1 - delta;
                 approxRes = of_float(approx$1);
                 approxRem = mul(approxRes, other);
@@ -32584,17 +32447,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.xor = xor;
     exports.or_ = or_;
     exports.and_ = and_;
-    exports.ge = ge;
-    exports.eq = eq;
-    exports.neq = neq;
-    exports.lt = lt;
-    exports.gt = gt;
-    exports.le = le;
     exports.equal_null = equal_null;
     exports.equal_undefined = equal_undefined;
     exports.equal_nullable = equal_nullable;
-    exports.min = min;
-    exports.max = max;
     exports.to_float = to_float;
     exports.of_float = of_float;
     exports.div = div;
@@ -32611,6 +32466,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
   // node_modules/@rescript/std/lib/js/caml_format.js
   var require_caml_format = __commonJS((exports) => {
     "use strict";
+    var Caml = require_caml();
     var Caml_int64 = require_caml_int64();
     function parse_digit(c) {
       if (c >= 65) {
@@ -32795,13 +32651,22 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       var threshold;
       switch (hbase) {
         case 0:
-          threshold = /* @__PURE__ */ Caml_int64.mk(-1, 536870911);
+          threshold = [
+            536870911,
+            4294967295
+          ];
           break;
         case 1:
-          threshold = /* @__PURE__ */ Caml_int64.mk(-1, 268435455);
+          threshold = [
+            268435455,
+            4294967295
+          ];
           break;
         case 2:
-          threshold = /* @__PURE__ */ Caml_int64.mk(-1717986919, 429496729);
+          threshold = [
+            429496729,
+            2576980377
+          ];
           break;
         case 3:
           threshold = Caml_int64.max_int;
@@ -32810,7 +32675,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       var len = s.length;
       var c = i < len ? s.charCodeAt(i) : 0;
       var d = Caml_int64.of_int32(parse_digit(c));
-      if (Caml_int64.lt(d, Caml_int64.zero) || Caml_int64.ge(d, base)) {
+      if (Caml.i64_lt(d, Caml_int64.zero) || Caml.i64_ge(d, base)) {
         throw {
           RE_EXN_ID: "Failure",
           _1: "int64_of_string",
@@ -32830,7 +32695,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
             continue;
           }
           var v = Caml_int64.of_int32(parse_digit(a));
-          if (Caml_int64.lt(v, Caml_int64.zero) || Caml_int64.ge(v, base) || Caml_int64.gt(acc, threshold)) {
+          if (Caml.i64_lt(v, Caml_int64.zero) || Caml.i64_ge(v, base) || Caml.i64_gt(acc, threshold)) {
             throw {
               RE_EXN_ID: "Failure",
               _1: "int64_of_string",
@@ -32846,7 +32711,10 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       };
       var res = Caml_int64.mul(sign, aux(d, i + 1 | 0));
       var or_res = Caml_int64.or_(res, Caml_int64.zero);
-      if (Caml_int64.eq(base, /* @__PURE__ */ Caml_int64.mk(10, 0)) && Caml_int64.neq(res, or_res)) {
+      if (Caml.i64_eq(base, [
+        0,
+        10
+      ]) && Caml.i64_neq(res, or_res)) {
         throw {
           RE_EXN_ID: "Failure",
           _1: "int64_of_string",
@@ -33139,27 +33007,42 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       return finish_formatting(f, s);
     }
     function dec_of_pos_int64(x) {
-      if (!Caml_int64.lt(x, Caml_int64.zero)) {
+      if (!Caml.i64_lt(x, Caml_int64.zero)) {
         return Caml_int64.to_string(x);
       }
-      var wbase = /* @__PURE__ */ Caml_int64.mk(10, 0);
+      var wbase = [
+        0,
+        10
+      ];
       var y = Caml_int64.discard_sign(x);
       var match = Caml_int64.div_mod(y, wbase);
-      var match$1 = Caml_int64.div_mod(Caml_int64.add(/* @__PURE__ */ Caml_int64.mk(8, 0), match[1]), wbase);
-      var quotient = Caml_int64.add(Caml_int64.add(/* @__PURE__ */ Caml_int64.mk(-858993460, 214748364), match[0]), match$1[0]);
+      var match$1 = Caml_int64.div_mod(Caml_int64.add([
+        0,
+        8
+      ], match[1]), wbase);
+      var quotient = Caml_int64.add(Caml_int64.add([
+        214748364,
+        3435973836
+      ], match[0]), match$1[0]);
       return Caml_int64.to_string(quotient) + "0123456789"[Caml_int64.to_int32(match$1[1])];
     }
     function oct_of_int64(x) {
       var s = "";
-      var wbase = /* @__PURE__ */ Caml_int64.mk(8, 0);
+      var wbase = [
+        0,
+        8
+      ];
       var cvtbl = "01234567";
-      if (Caml_int64.lt(x, Caml_int64.zero)) {
+      if (Caml.i64_lt(x, Caml_int64.zero)) {
         var y = Caml_int64.discard_sign(x);
         var match = Caml_int64.div_mod(y, wbase);
-        var quotient = Caml_int64.add(/* @__PURE__ */ Caml_int64.mk(0, 268435456), match[0]);
+        var quotient = Caml_int64.add([
+          268435456,
+          0
+        ], match[0]);
         var modulus = match[1];
         s = cvtbl[Caml_int64.to_int32(modulus)] + s;
-        while (Caml_int64.neq(quotient, Caml_int64.zero)) {
+        while (Caml.i64_neq(quotient, Caml_int64.zero)) {
           var match$1 = Caml_int64.div_mod(quotient, wbase);
           quotient = match$1[0];
           modulus = match$1[1];
@@ -33171,7 +33054,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         var quotient$1 = match$2[0];
         var modulus$1 = match$2[1];
         s = cvtbl[Caml_int64.to_int32(modulus$1)] + s;
-        while (Caml_int64.neq(quotient$1, Caml_int64.zero)) {
+        while (Caml.i64_neq(quotient$1, Caml_int64.zero)) {
           var match$3 = Caml_int64.div_mod(quotient$1, wbase);
           quotient$1 = match$3[0];
           modulus$1 = match$3[1];
@@ -33186,7 +33069,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         return Caml_int64.to_string(x);
       }
       var f = parse_format(fmt);
-      var x$1 = f.signedconv && Caml_int64.lt(x, Caml_int64.zero) ? (f.sign = -1, Caml_int64.neg(x)) : x;
+      var x$1 = f.signedconv && Caml.i64_lt(x, Caml_int64.zero) ? (f.sign = -1, Caml_int64.neg(x)) : x;
       var match = f.base;
       var s;
       switch (match) {
@@ -33392,8 +33275,8 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
   // node_modules/@rescript/std/lib/js/int32.js
   var require_int32 = __commonJS((exports) => {
     "use strict";
+    var Caml = require_caml();
     var Caml_format = require_caml_format();
-    var Caml_primitive = require_caml_primitive();
     var Caml_js_exceptions = require_caml_js_exceptions();
     function succ(n) {
       return n + 1 | 0;
@@ -33425,7 +33308,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         throw exn;
       }
     }
-    var compare = Caml_primitive.caml_int32_compare;
+    var compare = Caml.caml_int_compare;
     function equal(x, y) {
       return x === y;
     }
@@ -33452,6 +33335,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
   // node_modules/@rescript/std/lib/js/int64.js
   var require_int64 = __commonJS((exports) => {
     "use strict";
+    var Caml = require_caml();
     var Caml_int64 = require_caml_int64();
     var Caml_format = require_caml_format();
     var Caml_js_exceptions = require_caml_js_exceptions();
@@ -33459,7 +33343,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       return Caml_int64.sub(n, Caml_int64.one);
     }
     function abs(n) {
-      if (Caml_int64.ge(n, Caml_int64.zero)) {
+      if (Caml.i64_ge(n, Caml_int64.zero)) {
         return n;
       } else {
         return Caml_int64.neg(n);
@@ -33836,10 +33720,10 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
   // node_modules/@rescript/std/lib/js/bytes.js
   var require_bytes = __commonJS((exports) => {
     "use strict";
+    var Caml = require_caml();
     var Char = require_char();
     var Curry = require_curry();
     var Caml_bytes = require_caml_bytes();
-    var Caml_primitive = require_caml_primitive();
     var Caml_js_exceptions = require_caml_js_exceptions();
     function make(n, c) {
       var s = Caml_bytes.caml_create_bytes(n);
@@ -33923,7 +33807,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       ];
       var dstoff = match[1];
       var srcoff = match[0];
-      var cpylen = Caml_primitive.caml_int_min(s.length - srcoff | 0, len - dstoff | 0);
+      var cpylen = Caml.caml_int_min(s.length - srcoff | 0, len - dstoff | 0);
       if (cpylen > 0) {
         Caml_bytes.caml_blit_bytes(s, srcoff, r, dstoff, cpylen);
       }
@@ -34067,7 +33951,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       if (n === s.length) {
         return copy(s);
       }
-      var s$prime = Caml_bytes.caml_create_bytes(n);
+      var s$p = Caml_bytes.caml_create_bytes(n);
       n = 0;
       for (var i$1 = 0, i_finish$1 = s.length; i$1 < i_finish$1; ++i$1) {
         var c = s[i$1];
@@ -34077,7 +33961,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
             if (c >= 127) {
               exit = 1;
             } else {
-              s$prime[n] = c;
+              s$p[n] = c;
             }
           } else {
             exit = 2;
@@ -34086,26 +33970,26 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
           if (c >= 34) {
             exit = 2;
           } else {
-            s$prime[n] = c;
+            s$p[n] = c;
           }
         } else if (c >= 14) {
           exit = 1;
         } else {
           switch (c) {
             case 8:
-              s$prime[n] = 92;
+              s$p[n] = 92;
               n = n + 1 | 0;
-              s$prime[n] = 98;
+              s$p[n] = 98;
               break;
             case 9:
-              s$prime[n] = 92;
+              s$p[n] = 92;
               n = n + 1 | 0;
-              s$prime[n] = 116;
+              s$p[n] = 116;
               break;
             case 10:
-              s$prime[n] = 92;
+              s$p[n] = 92;
               n = n + 1 | 0;
-              s$prime[n] = 110;
+              s$p[n] = 110;
               break;
             case 0:
             case 1:
@@ -34120,31 +34004,31 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
               exit = 1;
               break;
             case 13:
-              s$prime[n] = 92;
+              s$p[n] = 92;
               n = n + 1 | 0;
-              s$prime[n] = 114;
+              s$p[n] = 114;
               break;
           }
         }
         switch (exit) {
           case 1:
-            s$prime[n] = 92;
+            s$p[n] = 92;
             n = n + 1 | 0;
-            s$prime[n] = 48 + (c / 100 | 0) | 0;
+            s$p[n] = 48 + (c / 100 | 0) | 0;
             n = n + 1 | 0;
-            s$prime[n] = 48 + (c / 10 | 0) % 10 | 0;
+            s$p[n] = 48 + (c / 10 | 0) % 10 | 0;
             n = n + 1 | 0;
-            s$prime[n] = 48 + c % 10 | 0;
+            s$p[n] = 48 + c % 10 | 0;
             break;
           case 2:
-            s$prime[n] = 92;
+            s$p[n] = 92;
             n = n + 1 | 0;
-            s$prime[n] = c;
+            s$p[n] = c;
             break;
         }
         n = n + 1 | 0;
       }
-      return s$prime;
+      return s$p;
     }
     function map(f, s) {
       var l = s.length;
@@ -34430,17 +34314,14 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
   // node_modules/@rescript/std/lib/js/string.js
   var require_string = __commonJS((exports) => {
     "use strict";
+    var Caml = require_caml();
     var Bytes = require_bytes();
     var Curry = require_curry();
     var Caml_bytes = require_caml_bytes();
     var Caml_string = require_caml_string();
-    var Caml_primitive = require_caml_primitive();
     var Caml_js_exceptions = require_caml_js_exceptions();
     function init(n, f) {
       return Caml_bytes.bytes_to_string(Bytes.init(n, f));
-    }
-    function copy(s) {
-      return Caml_bytes.bytes_to_string(Bytes.copy(Caml_bytes.bytes_of_string(s)));
     }
     function sub(s, ofs, len) {
       return Caml_bytes.bytes_to_string(Bytes.sub(Caml_bytes.bytes_of_string(s), ofs, len));
@@ -34733,7 +34614,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     function uncapitalize_ascii(s) {
       return Caml_bytes.bytes_to_string(Bytes.uncapitalize_ascii(Caml_bytes.bytes_of_string(s)));
     }
-    var compare = Caml_primitive.caml_string_compare;
+    var compare = Caml.caml_string_compare;
     function split_on_char(sep, s) {
       var r = 0;
       var j = s.length;
@@ -34764,16 +34645,13 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       return Caml_bytes.bytes_to_string(Bytes.uncapitalize(Caml_bytes.bytes_of_string(s)));
     }
     var make = Caml_string.make;
-    var fill = Bytes.fill;
     var blit = Bytes.blit_string;
     function equal(prim, prim$1) {
       return prim === prim$1;
     }
     exports.make = make;
     exports.init = init;
-    exports.copy = copy;
     exports.sub = sub;
-    exports.fill = fill;
     exports.blit = blit;
     exports.concat = concat;
     exports.iter = iter;
@@ -35148,18 +35026,18 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     var resolve = function(s) {
       var myGlobal = getGlobalThis();
       if (myGlobal[s] === void 0) {
-        throw new Error(s + " not polyfilled by BuckleScript yet\n");
+        throw new Error(s + " not polyfilled by ReScript yet\n");
       }
       return myGlobal[s];
     };
-    var register = function(s, fn) {
+    var register2 = function(s, fn) {
       var myGlobal = getGlobalThis();
       myGlobal[s] = fn;
       return 0;
     };
     exports.getGlobalThis = getGlobalThis;
     exports.resolve = resolve;
-    exports.register = register;
+    exports.register = register2;
   });
 
   // node_modules/@rescript/std/lib/js/pervasives.js
@@ -35915,6 +35793,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
   // node_modules/@rescript/std/lib/js/random.js
   var require_random = __commonJS((exports) => {
     "use strict";
+    var Caml = require_caml();
     var $$Array = require_array();
     var Int32 = require_int32();
     var Int64 = require_int64();
@@ -35952,7 +35831,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     }
     function make(seed) {
       var result = {
-        st: Caml_array.caml_make_vect(55, 0),
+        st: Caml_array.make(55, 0),
         idx: 0
       };
       full_init(result, seed);
@@ -35963,7 +35842,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     }
     function copy(s) {
       var result = {
-        st: Caml_array.caml_make_vect(55, 0),
+        st: Caml_array.make(55, 0),
         idx: 0
       };
       assign(result, s);
@@ -36016,7 +35895,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       ;
     }
     function int64(s, bound) {
-      if (Caml_int64.le(bound, Caml_int64.zero)) {
+      if (Caml.i64_le(bound, Caml_int64.zero)) {
         throw {
           RE_EXN_ID: "Invalid_argument",
           _1: "Random.int64",
@@ -36029,7 +35908,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         var b3 = Caml_int64.lsl_(Caml_int64.of_int32(bits(s) & 7), 60);
         var r = Caml_int64.or_(b1, Caml_int64.or_(b2, b3));
         var v = Caml_int64.mod_(r, bound);
-        if (!Caml_int64.gt(Caml_int64.sub(r, v), Caml_int64.add(Caml_int64.sub(Int64.max_int, bound), Caml_int64.one))) {
+        if (!Caml.i64_gt(Caml_int64.sub(r, v), Caml_int64.add(Caml_int64.sub(Int64.max_int, bound), Caml_int64.one))) {
           return v;
         }
         continue;
@@ -37442,13 +37321,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       }
       return template2.trim();
     }
-    function _templateObject() {
-      var data = _taggedTemplateLiteralLoose__default["default"](["linear-gradient(", "", ")"]);
-      _templateObject = function _templateObject2() {
-        return data;
-      };
-      return data;
-    }
+    var _templateObject;
     function linearGradient(_ref) {
       var colorStops = _ref.colorStops, fallback = _ref.fallback, _ref$toDirection = _ref.toDirection, toDirection = _ref$toDirection === void 0 ? "" : _ref$toDirection;
       if (!colorStops || colorStops.length < 2) {
@@ -37456,7 +37329,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       }
       return {
         backgroundColor: fallback || colorStops[0].replace(/,\s+/g, ",").split(" ")[0].replace(/,(?=\S)/g, ", "),
-        backgroundImage: constructGradientValue(_templateObject(), toDirection, colorStops.join(", ").replace(/,(?=\S)/g, ", "))
+        backgroundImage: constructGradientValue(_templateObject || (_templateObject = _taggedTemplateLiteralLoose__default["default"](["linear-gradient(", "", ")"])), toDirection, colorStops.join(", ").replace(/,(?=\S)/g, ", "))
       };
     }
     function normalize() {
@@ -37566,13 +37439,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
         }
       }];
     }
-    function _templateObject$1() {
-      var data = _taggedTemplateLiteralLoose__default["default"](["radial-gradient(", "", "", "", ")"]);
-      _templateObject$1 = function _templateObject2() {
-        return data;
-      };
-      return data;
-    }
+    var _templateObject$1;
     function radialGradient(_ref) {
       var colorStops = _ref.colorStops, _ref$extent = _ref.extent, extent = _ref$extent === void 0 ? "" : _ref$extent, fallback = _ref.fallback, _ref$position = _ref.position, position2 = _ref$position === void 0 ? "" : _ref$position, _ref$shape = _ref.shape, shape = _ref$shape === void 0 ? "" : _ref$shape;
       if (!colorStops || colorStops.length < 2) {
@@ -37580,7 +37447,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
       }
       return {
         backgroundColor: fallback || colorStops[0].split(" ")[0],
-        backgroundImage: constructGradientValue(_templateObject$1(), position2, shape, extent, colorStops.join(", "))
+        backgroundImage: constructGradientValue(_templateObject$1 || (_templateObject$1 = _taggedTemplateLiteralLoose__default["default"](["radial-gradient(", "", "", "", ")"])), position2, shape, extent, colorStops.join(", "))
       };
     }
     function retinaImage(filename, backgroundSize, extension, retinaFilename, retinaSuffix) {
@@ -38990,7 +38857,7 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     "use strict";
     var React = require_react();
     var ReactDom = require_react_dom();
-    var ServiceWorker = require_serviceWorker();
+    var ServiceWorker = (init_serviceWorker(), serviceWorker_exports);
     var App$ReasonGameOfLife = require_App_bs();
     require_();
     function register_service_worker(prim) {
@@ -39014,6 +38881,9 @@ For more info, visit https://reactjs.org/link/mock-scheduler`);
     exports.fallback = fallback;
     exports.app = app;
   });
-  require_Index_bs();
+
+  // src/index.js
+  var src_exports = {};
+  __reExport(src_exports, __toModule(require_Index_bs()));
 })();
 //# sourceMappingURL=bundle.js.map
