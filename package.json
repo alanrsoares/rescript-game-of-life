@@ -11,7 +11,7 @@
     "test": "jest",
     "re:build": "bsb -make-world -clean-world",
     "re:watch": "NINJA_ANSI_FORCED=1 bsb -make-world -w",
-    "predeploy": "yarn build",
+    "predeploy": "yarn build:production",
     "deploy": "gh-pages -d public",
     "dev": "concurrently --names public,res,esb -c green.bold,red.bold,blue.bold --kill-others yarn:start:web yarn:re:watch yarn:bundle:watch",
     "bundle": "esbuild src/index.js --outfile=public/dist/bundle.js --bundle --sourcemap --target=chrome58,firefox57,safari11,edge16 --define:process.env.NODE_ENV='\"development\"'",
