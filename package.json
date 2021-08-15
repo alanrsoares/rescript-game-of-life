@@ -39,7 +39,7 @@
     "@types/react-dom": "^17.0.9",
     "bs-platform": "^9.0.2",
     "concurrently": "^6.2.1",
-    "esbuild": "^0.11.23",
+    "esbuild": "^0.12.20",
     "gh-pages": "^3.2.3",
     "invariant": "^2.2.4",
     "levenary": "^1.1.1",
