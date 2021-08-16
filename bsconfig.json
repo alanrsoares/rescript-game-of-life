@@ -22,8 +22,13 @@
   ],
   "external-stdlib": "@rescript/std",
   "namespace": true,
-  "bs-dependencies": ["reason-react", "@ahrefs/bs-emotion", "@glennsl/bs-jest"],
-  "ppx-flags": ["@davesnx/styled-ppx/styled-ppx"],
+  "bs-dependencies": [
+    "reason-react",
+    "bs-css",
+    "bs-css-emotion",
+    "@glennsl/bs-jest"
+  ],
+  "ppx-flags": ["@davesnx/styled-ppx/ppx"],
   "refmt": 3,
   "warnings": {
     "error": "+101"

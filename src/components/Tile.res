@@ -1,9 +1,9 @@
 module Wrapper = %styled.div(
   (~background, ~shadow, ~tileSize) =>
     j`
-    width: $tileSize;
-    height: $tileSize;
-    background: $background;
+    width: $(tileSize);
+    height: $(tileSize);
+    background: $(background);
     border-radius: 50%;
     margin: 2px 1px;
     padding: 0;
@@ -11,7 +11,7 @@ module Wrapper = %styled.div(
     transition-duration: .1s;
     transition-timing-function: ease-in-out;
     cursor: pointer;
-    box-shadow: $shadow;
+    box-shadow: $(shadow);
   `
 )
 

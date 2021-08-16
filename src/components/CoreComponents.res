@@ -29,24 +29,24 @@ module Button = {
     let pseudoOutline = j`0 0 0 4px $shadow`
     let transition = "all .15s ease-in"
 
-    let className = %css(j`
-        font-size: .9rem;
-        padding: .5rem .8rem;
-        background-color: $background;
+    let className = %cx(j`
+        font-size: 0.9rem;
+        padding: 0.5rem 0.8rem;
+        background-color: $(background);
         width: 3rem;
         height: 3rem;
         color: white;
         border-radius: 50%;
-        margin: 0 .5rem;
+        margin: 0 0.5rem;
         border-width: 0;
         user-select: none;
         outline: 0rem none white;
         font-weight: 700;
         cursor: pointer;
-        transition: $transition;
+        transition: $(transition);
         :focus {
-          box-shadow: $pseudoOutline;
-          opacity: .9;
+          box-shadow: $(pseudoOutline);
+          opacity: 0.9;
         }
       `)
 
