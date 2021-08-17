@@ -23,7 +23,7 @@
   "external-stdlib": "@rescript/std",
   "namespace": true,
   "bs-dependencies": [
-    "reason-react",
+    "@rescript/react",
     "bs-css",
     "bs-css-emotion",
     "@glennsl/bs-jest"
