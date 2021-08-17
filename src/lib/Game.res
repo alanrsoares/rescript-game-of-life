@@ -1,9 +1,12 @@
+@genType
 type cellState =
   | Dead
   | Alive
 
+@genType
 type grid = array<array<cellState>>
 
+@genType
 type point = (int, int)
 
 module L = Belt.List
@@ -11,8 +14,8 @@ module A = Belt.Array
 
 let safeIndex = x =>
   switch x {
-  | (length, i) when i < 0 => length - 1
-  | (length, i) when i === length => 0
+  | (length, i) if i < 0 => length - 1
+  | (length, i) if i === length => 0
   | (_, i) => i
   }
 

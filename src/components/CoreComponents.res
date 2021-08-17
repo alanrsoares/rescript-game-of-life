@@ -19,17 +19,17 @@ module Content = %styled.div(`
 
 module Icon = {
   @react.component
-  let make = (~name) => <i className={"fas fa-" ++ name} />
+  let make = (~name: string) => <i className={j`fas fa-$name`} />
 }
 
 module Button = {
   @react.component
   let make = (~label, ~background, ~onClick, ~disabled=false, ~children) => {
     let shadow = Util.Colors.opacify(-0.4, background)
-    let pseudoOutline = j`0 0 0 4px $shadow`
+
     let transition = "all .15s ease-in"
 
-    let className = %cx(j`
+    let className = %cx(`
         font-size: 0.9rem;
         padding: 0.5rem 0.8rem;
         background-color: $(background);
@@ -45,7 +45,7 @@ module Button = {
         cursor: pointer;
         transition: $(transition);
         :focus {
-          box-shadow: $(pseudoOutline);
+          box-shadow: 0 0 0 4px $(shadow);
           opacity: 0.9;
         }
       `)

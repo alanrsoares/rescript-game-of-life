@@ -1,3 +1,4 @@
+@genType
 type state = {
   grid: Game.grid,
   isPlaying: bool,
@@ -7,6 +8,7 @@ type state = {
   frameRate: int,
 }
 
+@genType
 type action =
   | Random
   | Reset

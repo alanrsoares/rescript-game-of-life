@@ -1,6 +1,6 @@
 module Wrapper = %styled.div(
   (~background, ~shadow, ~tileSize) =>
-    j`
+    `
     width: $(tileSize);
     height: $(tileSize);
     background: $(background);
