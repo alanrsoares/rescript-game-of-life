@@ -29,7 +29,6 @@
     "@glennsl/bs-jest"
   ],
   "ppx-flags": ["@davesnx/styled-ppx/ppx"],
-  "refmt": 3,
   "warnings": {
     "error": "+101"
   },
