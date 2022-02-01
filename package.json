@@ -39,7 +39,7 @@
     "bs-css": "^14.0.2",
     "bs-css-emotion": "^3.0.0",
     "concurrently": "^6.2.1",
-    "esbuild": "^0.12.20",
+    "esbuild": "^0.14.16",
     "gentype": "^4.1.0",
     "gh-pages": "^3.2.3",
     "invariant": "^2.2.4",
