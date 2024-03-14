@@ -32,9 +32,6 @@
   "devDependencies": {
     "@davesnx/styled-ppx": "^0.24.1",
     "@glennsl/bs-jest": "^0.7.0",
-    "@testing-library/jest-dom": "^6.4.2",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
     "@types/react": "^17.0.76",
     "@types/react-dom": "^17.0.25",
     "bs-css": "^14.0.2",
