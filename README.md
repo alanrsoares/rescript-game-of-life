@@ -17,7 +17,7 @@ git clone git@github.com:alanrsoares/rescript-game-of-life.git
 Install dependencies:
 
 ```bash
-yarn install
+pnpm install
 ```
 
 Or with npm:
@@ -29,7 +29,7 @@ npm install
 Run it:
 
 ```
-yarn start
+pnpm start
 ```
 
 Or with npm:
